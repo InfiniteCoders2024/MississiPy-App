@@ -9,12 +9,26 @@ class Product extends Model
 {
     use HasFactory;
 
-    // Table name not the default
     protected $table = 'Product';
-    
-    // Database connection not the default
     protected $connection = 'mysql_mississipy';
-    
-    // No extra columns
     public $timestamps = false;
+    protected $fillable = ['quantity', 'price', 'vat', 'score', 'product_image', 'active', 'reason'];
+
+
+    public function OrderedItem()
+    {
+        return $this->hasMany(Ordered_Item::class);
+    }
+
+
+    public function Book()
+    {
+        return $this->hasMany(Book::class, 'product_id');
+    }
+
+
+    public function Electronik()
+    {
+        return $this->hasMany(Electronik::class, 'product_id');
+    }
 }

@@ -9,12 +9,8 @@ class Operator extends Model
 {
     use HasFactory;
 
-    // Table name not the default
     protected $table = 'Operator';
-
-    // Database connection not the default
     protected $connection = 'mysql_mississipy';
-    
-    // No extra columns
     public $timestamps = false;
+    protected $fillable = ['firstname', 'surname', 'email', 'password'];
 }

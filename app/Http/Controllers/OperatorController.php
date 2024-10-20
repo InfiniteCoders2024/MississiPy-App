@@ -13,6 +13,8 @@ class OperatorController extends Controller
     public function index()
     {
         //
+        $operators_list = Operator::all();
+        return view('operator.index', ['operators' => $operators_list]); 
     }
 
     /**

@@ -9,12 +9,20 @@ class Ordered_Item extends Model
 {
     use HasFactory;
 
-    // Table name not the default
     protected $table = 'Ordered_Item';
-
-    // Database connection not the default
     protected $connection = 'mysql_mississipy';
-    
-    // No extra columns
     public $timestamps = false;
+    protected $fillable = ['quantity', 'price', 'vat_amount'];
+
+
+    public function Order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
+    
+    public function Product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

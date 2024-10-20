@@ -9,12 +9,21 @@ class Client extends Model
 {
     use HasFactory;
 
-    // Table name not the default
     protected $table = 'Client';
-    
-    // Database connection not the default
     protected $connection = 'mysql_mississipy';
-    
-    // No extra columns
     public $timestamps = false;
+    protected $fillable = ['firstname', 'surname', 'email', 'password', 'address', 'zip_code', 'city', 'country',
+    'phone_number','last_login', 'birthdate'];
+
+
+    public function Orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    
+    public function Recommendation()
+    {
+        return $this->hasMany(Recommendation::class);
+    }
 }

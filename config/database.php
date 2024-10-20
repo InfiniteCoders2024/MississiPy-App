@@ -16,8 +16,8 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'sqlite'),
-
+    // 'default' => env('DB_CONNECTION', 'sqlite'),
+    'default' => env('DB_CONNECTION', 'mysql_mississipy'),
     /*
     |--------------------------------------------------------------------------
     | Database Connections
@@ -64,15 +64,15 @@ return [
 
         'mysql_mississipy' => [
             'driver' => 'mysql',
-            'url' => env('DB_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'MississiPy'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', ''),
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => env('DB_CHARSET', 'utf8mb4'),
-            'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
+            'url' => env('DB_SECOND_URL'),
+            'host' => env('DB_SECOND_HOST', '127.0.0.1'),
+            'port' => env('DB_SECOND_PORT', '3306'),
+            'database' => env('DB_SECOND_DATABASE', 'MississiPy'),
+            'username' => env('DB_SECOND_USERNAME', 'root'),
+            'password' => env('DB_SECOND_PASSWORD', ''),
+            'unix_socket' => env('DB_SECOND_SOCKET', ''),
+            'charset' => env('DB_SECOND_CHARSET', 'utf8mb4'),
+            'collation' => env('DB_SECOND_COLLATION', 'utf8mb4_unicode_ci'),
             'prefix' => '',
             'prefix_indexes' => true,
             'strict' => true,

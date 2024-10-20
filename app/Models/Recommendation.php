@@ -9,12 +9,20 @@ class Recommendation extends Model
 {
     use HasFactory;
 
-    // Table name not the default
     protected $table = 'Recommendation';
-
-    // Database connection not the default
     protected $connection = 'mysql_mississipy';
-    
-    // No extra columns
     public $timestamps = false;
+    protected $fillable = ['reason', 'start_date'];
+
+
+    public function Product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+    
+    public function Client()
+    {
+        return $this->belongsTo(Client::class);
+    }
 }

@@ -9,16 +9,18 @@ class Electronik extends Model
 {
     use HasFactory;
 
-    // Table name not the default
-    protected $table = 'Electronik';
-
-    // Database connection not the default
+    protected $table = 'Electronic';
     protected $connection = 'mysql_mississipy';
 
-    // Primary Key not the default
     protected $primaryKey = null;
     public $incrementing = false;
     
-    // No extra columns
     public $timestamps = false;
+    protected $fillable = ['serial_number', 'brand', 'model', 'spec_tec', 'type'];
+
+
+    public function Product()
+    {
+        return $this->belongsTo(Product::class, 'id');
+    }
 }

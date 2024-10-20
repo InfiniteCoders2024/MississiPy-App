@@ -9,16 +9,25 @@ class Book extends Model
 {
     use HasFactory;
 
-    // Table name not the default
     protected $table = 'Book';
-    
-    // Database connection not the default
     protected $connection = 'mysql_mississipy';
 
-    // Primary Key not the default
     protected $primaryKey = null;
     public $incrementing = false;
     
-    // No extra columns
     public $timestamps = false;
+    protected $fillable = ['isbn13', 'title', 'genre', 'publisher', 'publication_date'];
+
+
+    public function Product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+
+    public function BookAuthor()
+    {
+        return $this->hasMany(BookAuthor::class, 'procuct_id');
+    }
 }
+

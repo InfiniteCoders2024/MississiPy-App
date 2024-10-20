@@ -9,12 +9,14 @@ class Author extends Model
 {
     use HasFactory;
 
-    // Table name not the default
     protected $table = 'Author';
-    
-    // Database connection not the default
     protected $connection = 'mysql_mississipy';
-
-    // No extra columns
     public $timestamps = false;
+    protected $fillable = ['name', 'fullname', 'birthdate'];
+
+
+    public function BookAuthor()
+    {
+        return $this->hasMany(BookAuthor::class, 'author_id');
+    }
 }
