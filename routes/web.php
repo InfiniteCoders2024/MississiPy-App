@@ -20,11 +20,35 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+// Rota for Models
 
-// Adicionado não estava inicialmente
-
+// Books
 use App\Http\Controllers\BookController;    
 Route::get('/book', [BookController::class, 'index']);
 
+// Operators
 use App\Http\Controllers\OperatorController;
 Route::get('/operator', [OperatorController::class, 'index']);
+
+
+// Rota for Views
+
+// welcome_client
+Route::get('/welcome_client', function () {
+    return view('welcome_client');
+})->name('welcome_client');
+
+// search_result
+Route::get('/search_result', function () {
+    return view('search_result');
+});
+
+// product_detail
+Route::get('/product_detail', function () {
+    return view('product_detail');
+});
+
+// checkout
+Route::get('/checkout', function () {
+    return view('checkout');
+});
