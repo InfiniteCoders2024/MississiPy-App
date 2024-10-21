@@ -11,6 +11,11 @@ class Product extends Model
 
     protected $table = 'Product';
     protected $connection = 'mysql_mississipy';
+
+    public $incrementing = false; 
+    protected $primaryKey = 'id';
+    protected $keyType = 'string';
+
     public $timestamps = false;
     protected $fillable = ['quantity', 'price', 'vat', 'score', 'product_image', 'active', 'reason'];
 
