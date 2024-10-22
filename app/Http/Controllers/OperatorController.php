@@ -14,7 +14,7 @@ class OperatorController extends Controller
     {
         //
         $operators_list = Operator::all();
-        return view('operator.index', ['operators' => $operators_list]); 
+        return view('mississipy.operator.index', ['operators' => $operators_list]); 
     }
 
     /**
@@ -22,7 +22,7 @@ class OperatorController extends Controller
      */
     public function create()
     {
-        //
+        return view('mississipy.operator.create');
     }
 
     /**
@@ -30,7 +30,8 @@ class OperatorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Operator::create($request->all());
+        return redirect()->route('mississipy.operator.index');
     }
 
     /**
@@ -38,7 +39,7 @@ class OperatorController extends Controller
      */
     public function show(Operator $operator)
     {
-        //
+        return view('mississipy.operator.show', compact('operator'));
     }
 
     /**
@@ -46,7 +47,7 @@ class OperatorController extends Controller
      */
     public function edit(Operator $operator)
     {
-        //
+        return view('mississipy.operator.edit', compact('operator'));
     }
 
     /**
@@ -54,7 +55,8 @@ class OperatorController extends Controller
      */
     public function update(Request $request, Operator $operator)
     {
-        //
+        $operator->update($request->all());
+        return redirect()->route('mississipy.operator.index');
     }
 
     /**
@@ -62,6 +64,7 @@ class OperatorController extends Controller
      */
     public function destroy(Operator $operator)
     {
-        //
+        $operator->delete();
+        return redirect()->route('mississipy.operator.index');
     }
 }

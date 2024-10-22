@@ -12,7 +12,8 @@ class OrderedItemController extends Controller
      */
     public function index()
     {
-        //
+        $ordered_items = Ordered_Item::all();
+        return view('mississipy.ordered_item.index', compact('ordered_items'));
     }
 
     /**
@@ -20,7 +21,7 @@ class OrderedItemController extends Controller
      */
     public function create()
     {
-        //
+        return view('mississipy.ordered_item.create');
     }
 
     /**
@@ -28,7 +29,8 @@ class OrderedItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Ordered_Item::create($request->all());
+        return redirect()->route('mississipy.ordered_item.index');
     }
 
     /**
@@ -36,7 +38,7 @@ class OrderedItemController extends Controller
      */
     public function show(Ordered_Item $ordered_Item)
     {
-        //
+        return view('mississipy.ordered_item.show', compact('ordered_item'));
     }
 
     /**
@@ -44,7 +46,7 @@ class OrderedItemController extends Controller
      */
     public function edit(Ordered_Item $ordered_Item)
     {
-        //
+        return view('mississipy.ordered_item.edit', compact('ordered_item'));
     }
 
     /**
@@ -52,7 +54,8 @@ class OrderedItemController extends Controller
      */
     public function update(Request $request, Ordered_Item $ordered_Item)
     {
-        //
+        $ordered_item->update($request->all());
+        return redirect()->route('mississipy.ordered_item.index');
     }
 
     /**
@@ -60,6 +63,7 @@ class OrderedItemController extends Controller
      */
     public function destroy(Ordered_Item $ordered_Item)
     {
-        //
+        $ordered_item->delete();
+        return redirect()->route('mississipy.ordered_item.index'); 
     }
 }

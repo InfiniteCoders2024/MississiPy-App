@@ -12,7 +12,8 @@ class BookAuthorController extends Controller
      */
     public function index()
     {
-        //
+        $bookauthors = BookAuthor::all();
+        return view('mississipy.bookauthor.index', compact('bookauthors'));
     }
 
     /**
@@ -20,7 +21,7 @@ class BookAuthorController extends Controller
      */
     public function create()
     {
-        //
+        return view('mississipy.bookauthor.create');
     }
 
     /**
@@ -28,7 +29,8 @@ class BookAuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        BookAuthor::create($request->all());
+        return redirect()->route('mississipy.bookauthor.index');
     }
 
     /**
@@ -36,7 +38,7 @@ class BookAuthorController extends Controller
      */
     public function show(BookAuthor $bookAuthor)
     {
-        //
+        return view('mississipy.bookauthor.show', compact('bookauthor'));
     }
 
     /**
@@ -44,7 +46,7 @@ class BookAuthorController extends Controller
      */
     public function edit(BookAuthor $bookAuthor)
     {
-        //
+        return view('mississipy.bookauthor.edit', compact('bookauthor'));
     }
 
     /**
@@ -52,7 +54,8 @@ class BookAuthorController extends Controller
      */
     public function update(Request $request, BookAuthor $bookAuthor)
     {
-        //
+        $bookAuthor->update($request->all());
+        return redirect()->route('mississipy.bookauthor.index');
     }
 
     /**
@@ -60,6 +63,7 @@ class BookAuthorController extends Controller
      */
     public function destroy(BookAuthor $bookAuthor)
     {
-        //
+        $bookAuthor->delete();
+        return redirect()->route('mississipy.bookauthor.index');
     }
 }

@@ -12,7 +12,8 @@ class RecommendationController extends Controller
      */
     public function index()
     {
-        //
+        $recommendations = Recommendation::all();
+        return view('recommendation.index', compact('recommendations'));
     }
 
     /**
@@ -20,7 +21,7 @@ class RecommendationController extends Controller
      */
     public function create()
     {
-        //
+        return view('recommendation.create');
     }
 
     /**
@@ -28,7 +29,8 @@ class RecommendationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Recommendation::create($request->all());
+        return redirect()->route('recommendation.index');
     }
 
     /**
@@ -36,7 +38,7 @@ class RecommendationController extends Controller
      */
     public function show(Recommendation $recommendation)
     {
-        //
+        return view('recommendation.show', compact('recommendation'));
     }
 
     /**
@@ -44,7 +46,7 @@ class RecommendationController extends Controller
      */
     public function edit(Recommendation $recommendation)
     {
-        //
+        return view('recommendation.edit', compact('recommendation'));
     }
 
     /**
@@ -52,7 +54,8 @@ class RecommendationController extends Controller
      */
     public function update(Request $request, Recommendation $recommendation)
     {
-        //
+        $recommendation->update($request->all());
+        return redirect()->route('mississipy.recommendation.index');
     }
 
     /**
@@ -60,6 +63,7 @@ class RecommendationController extends Controller
      */
     public function destroy(Recommendation $recommendation)
     {
-        //
+        $recommendation->delete();
+        return redirect()->route('mississipy.recommendation.index');
     }
 }

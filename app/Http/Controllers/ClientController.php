@@ -12,7 +12,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        $clients = Client::all();
+        return view('mississipy.client.index', compact('clients'));
     }
 
     /**
@@ -20,7 +21,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('mississipy.client.create');
     }
 
     /**
@@ -28,7 +29,8 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Client::create($request->all());
+        return redirect()->route('mississipy.client.index');
     }
 
     /**
@@ -36,7 +38,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        //
+        return view('mississipy.client.show', compact('client'));
     }
 
     /**
@@ -44,7 +46,7 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        //
+        return view('mississipy.client.edit', compact('client'));
     }
 
     /**
@@ -52,7 +54,8 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        //
+        $client->update($request->all());
+        return redirect()->route('mississipy.client.index');
     }
 
     /**
@@ -60,6 +63,7 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        $client->delete();
+        return redirect()->route('mississipy.client.index');
     }
 }

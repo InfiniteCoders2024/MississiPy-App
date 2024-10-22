@@ -12,7 +12,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::all();
+        return view('mississipy.order.index', compact('orders'));  
     }
 
     /**
@@ -20,7 +21,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        return view('mississipy.order.create');
     }
 
     /**
@@ -28,7 +29,8 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Order::create($request->all());
+        return redirect()->route('order.index');
     }
 
     /**
@@ -36,7 +38,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return view('mississipy.order.show', compact('order'));
     }
 
     /**
@@ -44,7 +46,7 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        return view('mississipy.order.edit', compact('order'));
     }
 
     /**
@@ -52,7 +54,8 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $order->update($request->all());
+        return redirect()->route('mississipy.order.index');
     }
 
     /**
@@ -60,6 +63,7 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+        return redirect()->route('mississipy.order.index');
     }
 }
