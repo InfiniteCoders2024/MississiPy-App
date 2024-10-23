@@ -49,7 +49,7 @@
 
     <h1>Create a New Electronic</h1>
 
-    <form action="{{ route('electronic.store') }}" method="POST">
+    <form action="{{ route('mississipy.electronic.store') }}" method="POST">
         @csrf
 
         <label for="product_id">Product ID:</label>

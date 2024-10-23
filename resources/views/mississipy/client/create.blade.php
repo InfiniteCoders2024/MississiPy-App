@@ -50,7 +50,7 @@
 
     <h1>Create a New Client</h1>
 
-    <form action="{{ route('client.store') }}" method="POST">
+    <form action="{{ route('mississipy.client.store') }}" method="POST">
         @csrf
 
         <label for="firstname">First Name:</label>

@@ -46,7 +46,7 @@
 <body>
 
     <h1>Create a New Ordered Item</h1>
-    <form action="{{ route('ordered_item.store') }}" method="POST">
+    <form action="{{ route('mississipy.ordered_item.store') }}" method="POST">
         @csrf
 
         <label for="order_id">Order ID:</label>

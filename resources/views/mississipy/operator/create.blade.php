@@ -47,7 +47,7 @@
 
 <h1>Create a New Operator</h1>
 
-<form action="{{ route('operator.store') }}" method="POST">
+<form action="{{ route('mississipy.operator.store') }}" method="POST">
     @csrf
 
     <label for="firstname">First Name:</label>
