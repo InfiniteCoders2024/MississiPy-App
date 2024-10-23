@@ -2,9 +2,9 @@
 <nav class="navbar navbar-expand-lg bg-primary navbar-dark">
     <div class="container-fluid">
         <!-- Logo à esquerda -->
-        <a class="navbar-brand" aria-current="page" href="{{ url('/') }}">
-            <img src="https://banner2.cleanpng.com/20180501/abw/avdegic5l.webp" alt="Logo" width="30" height="24"
-                class="d-inline-block align-text-top">
+        <a class="navbar-brand" href="{{ url('/') }}">
+            <img src="{{ asset('https://banner2.cleanpng.com/20180501/abw/avdegic5l.webp') }}" alt="MississiPy Logo"
+                width="30" height="30" class="d-inline-block align-text-top me-2">
             MississiPy
         </a>
 
@@ -21,26 +21,38 @@
 
             <!-- Botão de pesquisa centralizado com ícone à esquerda -->
             <div class="d-flex justify-content-center flex-grow-1">
-                <a class="btn btn-outline-light rounded-pill d-flex align-items-center justify-content-start" href="{{ route('searchBar') }}" role="button" style="width: 300px;">
+                <a class="btn btn-outline-light rounded-pill d-flex align-items-center justify-content-start"
+                    href="{{ route('searchBar') }}" role="button" style="width: 300px;">
                     <i class="bi bi-search me-2"></i> <!-- Ícone de lupa à esquerda com margem -->
                     <span>Search...</span>
                 </a>
             </div>
 
-            <!-- Parte direita com Login, Register, Checkout, Logout -->
+            <!-- Menu à direita -->
             <ul class="navbar-nav ms-auto">
                 @auth
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('checkout') }}">Checkout</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('logout') }}"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            Logout
+                        <a class="nav-link" href="{{ route('checkout') }}">
+                            <i class="bi bi-cart3 me-1"></i>Checkout
                         </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle me-1"></i>{{ Auth::user()->name }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
                     </li>
                 @else
                     <li class="nav-item">
