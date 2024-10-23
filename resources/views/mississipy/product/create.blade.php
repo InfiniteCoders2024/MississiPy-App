@@ -47,7 +47,7 @@
 
 <h1>Create a New Order</h1>
 
-<form action="{{ route('order.store') }}" method="POST">
+<form action="{{ route('mississipy.product.store') }}" method="POST">
     @csrf
 
     <label for="date_time">Date and Time:</label>
@@ -60,7 +60,7 @@
         <option value="Overnight">Overnight</option>
     </select>
 
-    <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('mississipy.product.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <label for="quantity">Quantity:</label>
         <input type="number" id="quantity" name="quantity" required>

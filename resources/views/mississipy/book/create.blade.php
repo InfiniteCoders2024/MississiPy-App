@@ -47,7 +47,7 @@
 
     <h1>Create a New Book</h1>
 
-    <form action="{{ route('book.store') }}" method="POST">
+    <form action="{{ route('mississipy.book.store') }}" method="POST">
         @csrf
 
         <label for="product_id">Product ID:</label>

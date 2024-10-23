@@ -47,7 +47,7 @@
 
 <h1>Create a New Order</h1>
 
-<form action="{{ route('order.store') }}" method="POST">
+<form action="{{ route('mississipy.order.store') }}" method="POST">
     @csrf
 
     <label for="date_time">Date and Time:</label>
