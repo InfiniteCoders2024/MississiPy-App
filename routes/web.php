@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,53 +17,68 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 // Rotas for Models ------------------------------------------------------------
 
 // Author
 use App\Http\Controllers\AuthorController;
+
 Route::get('/author', [AuthorController::class, 'index']);
 
 
 Route::get('/author/create', [AuthorController::class, 'create'])->name('author.create');
 
 // Book
-use App\Http\Controllers\BookController;    
+use App\Http\Controllers\BookController;
+
 Route::get('/book', [BookController::class, 'index']);
 
 // BookAuthor
 use App\Http\Controllers\BookAuthorController;
+
 Route::get('/bookauthor', [BookAuthorController::class, 'index']);
 
 // Client
 use App\Http\Controllers\ClientController;
+
 Route::get('/client', [ClientController::class, 'index']);
 
 // Electronic
 use App\Http\Controllers\ElectronicController;
+
 Route::get('/electronic', [ElectronicController::class, 'index']);
 
 // Operator
 use App\Http\Controllers\OperatorController;
+
 Route::get('/operator', [OperatorController::class, 'index']);
 
 // Order
 use App\Http\Controllers\OrderController;
+
 Route::get('/order', [OrderController::class, 'index']);
 
 // Ordered_item
 use App\Http\Controllers\OrderedItemController;
+
 Route::get('/ordered_item', [OrderedItemController::class, 'index']);
 
 // Product
 use App\Http\Controllers\ProductController;
+
 Route::get('/product', [ProductController::class, 'index']);
+
+// Route for NavBar Pesquisa e CheckOut -------------------------------------------------------------
+
+Route::get('/searchBar', [ProductController::class, 'searchBar'])->name('searchBar');
+
+// Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
 
 // Recommendation
 use App\Http\Controllers\RecommendationController;
-Route::get('/recommendation', [RecommendationController::class, 'index']);
 
+Route::get('/recommendation', [RecommendationController::class, 'index']);
 
 // Rotas for Views --------------------------------------------------------------
 
@@ -93,7 +107,7 @@ Route::get('/checkout', function () {
 
 // Author
 Route::get('/author/create', [AuthorController::class, 'create'])->name('mississipy.author.create');
-Route::post('/author', [AuthorController::class, 'store'])->name('mississipy.author.store');   
+Route::post('/author', [AuthorController::class, 'store'])->name('mississipy.author.store');
 
 // Book
 Route::get('/book/create', [BookController::class, 'create'])->name('mississipy.book.create');
@@ -109,7 +123,7 @@ Route::post('/electronic', [ElectronicController::class, 'store'])->name('missis
 
 // Operator
 Route::get('/operator/create', [OperatorController::class, 'create'])->name('mississipy.operator.create');
-Route::post('/operator', [OperatorController::class, 'store'])->name('mississipy.operator.store'); 
+Route::post('/operator', [OperatorController::class, 'store'])->name('mississipy.operator.store');
 
 // Order
 Route::get('/order/create', [OrderController::class, 'create'])->name('mississipy.order.create');

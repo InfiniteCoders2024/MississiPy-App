@@ -66,4 +66,19 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->route('mississipy.product.index');
     }
+
+    /**
+     * Search for products based on a given term.
+     */
+    public function searchBar(Request $request)
+    {
+        // Get the search term from the request
+        $termo = $request->input('searchBar');
+
+        // Search for products whose names contain the search term
+        $produtos = Product::where('id', 'like', '%' . $termo . '%')->get(); // 
+
+        // Return the search results view with the matching products
+        return view('searchBar', compact('produtos'));
+    }
 }
