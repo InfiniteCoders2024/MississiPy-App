@@ -14,9 +14,8 @@ class Author extends Model
     public $timestamps = false;
     protected $fillable = ['name', 'fullname', 'birthdate'];
 
-
-    public function BookAuthor()
+    public function books()
     {
-        return $this->hasMany(BookAuthor::class, 'author_id');
+        return $this->belongsToMany(Book::class, 'bookauthor', 'id', 'product_id');
     }
 }

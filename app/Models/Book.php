@@ -12,7 +12,8 @@ class Book extends Model
     protected $table = 'Book';
     protected $connection = 'mysql_mississipy';
 
-    protected $primaryKey = null;
+    protected $primaryKey = 'product_id';
+    protected $keyType = 'string';
     public $incrementing = false;
     
     public $timestamps = false;
@@ -21,13 +22,12 @@ class Book extends Model
 
     public function Product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class, 'product_id');
     }
 
-
-    public function BookAuthor()
+    public function Author()
     {
-        return $this->hasMany(BookAuthor::class, 'procuct_id');
+        return $this->belongsToMany(Author::class, 'bookauthor', 'id', 'product_id');
     }
 }
 

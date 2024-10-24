@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Book;        // for method showProductDetail
+use App\Models\Electronic;  // for method showProductDetail
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -81,4 +83,30 @@ class ProductController extends Controller
         // Return the search results view with the matching products
         return view('searchBar', compact('produtos'));
     }
+
+
+    /**
+     * Show the detail of a product based on its type.
+     */
+    public function showProductDetail($product_type, $id)
+    {
+        // Fetch the product
+        $common_details = Product::findOrFail($id);
+
+        // Based on the product type, fetch the specific model
+        if ($product_type == 'book') {
+            $specific_details = Book::findOrFail($id);
+        } elseif ($product_type == 'electronic') {
+            $specific_details = Electronic::findOrFail($id);
+        } else {
+            abort(404); // Invalid product type
+        }
+
+        return view('mississipy.product_detail', [
+            'product_type' => $product_type,
+            'common_details' => $common_details,
+            'specific_details' => $specific_details,
+        ]);
+    }
+
 }

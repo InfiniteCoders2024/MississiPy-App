@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class BookAuthor extends Model
+class BookAuthor extends Pivot
 {
     use HasFactory;
 
@@ -16,7 +17,7 @@ class BookAuthor extends Model
     
     public function Author()
     {
-        return $this->belongsTo(Author::class);
+        return $this->belongsTo(Author::class, 'id');
     }
 
 
