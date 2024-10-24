@@ -94,20 +94,10 @@ Route::get('/searchBar', [ProductController::class, 'searchBar'])->name('searchB
 
 // welcome_client
 Route::get('/welcome_client', function () {
-    return view('welcome_client');
+    return view('mississipy.welcome_client');
 })->name('welcome_client');
-
-// search_result
-Route::get('/search_result', function () {
-    return view('search_result');
-});
-
-// product_detail
-Route::get('/product_detail', function () {
-    return view('product_detail');
-});
 
 // checkout
 Route::get('/checkout', function () {
-    return view('checkout');
+    return view('mississipy.checkout');
 });
