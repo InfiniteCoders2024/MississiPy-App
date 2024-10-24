@@ -33,6 +33,7 @@ use App\Http\Controllers\BookController;
 Route::get('/book', [BookController::class, 'index']);
 Route::post('/book', [BookController::class, 'store'])->name('mississipy.book.store');
 Route::get('/book/create', [BookController::class, 'create'])->name('mississipy.book.create');
+Route::get('/book/search/{searchText}', [BookController::class, 'searchBookFor']);
 
 // BookAuthor
 use App\Http\Controllers\BookAuthorController;
@@ -49,6 +50,7 @@ use App\Http\Controllers\ElectronicController;
 Route::get('/electronic', [ElectronicController::class, 'index']);
 Route::post('/electronic', [ElectronicController::class, 'store'])->name('mississipy.electronic.store');
 Route::get('/electronic/create', [ElectronicController::class, 'create'])->name('mississipy.electronic.create');
+Route::get('/electronic/search/{searchText}', [ElectronicController::class, 'searchElectronicFor']);
 
 // Operator
 use App\Http\Controllers\OperatorController;
@@ -73,9 +75,7 @@ use App\Http\Controllers\ProductController;
 Route::get('/product', [ProductController::class, 'index']);
 Route::post('/product', [ProductController::class, 'store'])->name('mississipy.product.store');
 Route::get('/product/create', [ProductController::class, 'create'])->name('mississipy.product.create');
-// Route::get('/product/{product_type}/{id}', [ProductController::class, 'showProductDetail'])->name('mississipy.product.detail');
-Route::get('/product/{product_type}/{id}', [ProductController::class, 'showProductDetail']);
-
+Route::get('/product/{product_type}/{id}', [ProductController::class, 'showProductDetail'])->name('mississipy.product.detail');
 
 // Recommendation
 use App\Http\Controllers\RecommendationController;
