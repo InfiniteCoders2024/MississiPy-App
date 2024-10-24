@@ -17,7 +17,7 @@ class Electronic extends Model
     public $incrementing = false;
     
     public $timestamps = false;
-    protected $fillable = ['serial_number', 'brand', 'model', 'spec_tec', 'type'];
+    protected $fillable = ['serial_num', 'brand', 'model', 'spec_tec', 'type'];
 
 
     public function Product()

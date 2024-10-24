@@ -8,17 +8,17 @@
        <h1>Search Results for "{{ $searchText }}"</h1>
 
        @if($results->isEmpty())
-           <p>No books found matching your search criteria.</p>
-       @else
-           <table class="table">
+           <p>No Products found matching your search criteria.</p>
+       @elseif ($product_type == 'book')
+           <table>
                <thead>
                    <tr>
-                       <th>product_id</th>
-                       <th>title</th>
-                       <th>isbn13</th>
-                       <th>genre</th>
-                       <th>publisher</th>
-                       <th>publication_date</th>
+                       <th>Product id</th>
+                       <th>Title</th>
+                       <th>ISBN13</th>
+                       <th>Genre</th>
+                       <th>Publisher</th>
+                       <th>Publication date</th>
                    </tr>
                </thead>
                <tbody>
@@ -34,5 +34,29 @@
                    @endforeach
                </tbody>
            </table>
+       @elseif ($product_type == 'electronic')
+           <table>
+               <thead>
+                   <tr>
+                       <th>Product id</th>
+                       <th>Brand</th>
+                       <th>Model</th>
+                       <th>Spec Tec</th>
+                       <th>Type</th>
+                   </tr>
+               </thead> 
+               <tbody>
+                   @foreach($results as $electronic)
+                   <tr> 
+                       <td>{{ $electronic->product_id }}</td>
+                       <td>{{ $electronic->brand }}</td>
+                       <td>{{ $electronic->model }}</td>
+                       <td>{{ $electronic->spec_tec }}</td>
+                       <td>{{ $electronic->type }}</td>
+                   </tr>
+                   @endforeach
+               </tbody>
+           </table> 
        @endif
    </div>
+</body>

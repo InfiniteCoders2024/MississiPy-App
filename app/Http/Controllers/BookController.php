@@ -74,7 +74,7 @@ class BookController extends Controller
 
     public function searchBookFor($searchText)
     {
-        // Get all column names from the Book table
+        // Get all column names for searching
         $columns = ['isbn13', 'title', 'genre', 'publisher', 'publication_date'];
 
         // Build the query

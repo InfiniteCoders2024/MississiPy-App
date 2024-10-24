@@ -73,8 +73,8 @@ class ElectronicController extends Controller
      */
     public function searchElectronicFor($searchText)
     {
-        // Get all column names from the Electronic table
-        $columns = ['serial_number', 'brand', 'model', 'spec_tec', 'type'];
+        // Get all column names for searching
+        $columns = ['serial_num', 'brand', 'model', 'spec_tec', 'type'];
 
         // Build the query
         $query = Electronic::query();
@@ -87,7 +87,7 @@ class ElectronicController extends Controller
         $results = $query->get();
 
         // Return the view with the results
-        return view('search_result', [
+        return view('mississipy.search_result', [
             'product_type' => 'electronic',
             'results' => $results,
             'searchText' => $searchText
