@@ -1,10 +1,10 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg bg-primary navbar-dark" id="main-navbar">
     <div class="container-fluid">
-        <!-- Logo personalizado à esquerda -->
+        <!-- Logotipos personalizados à esquerda -->
         <a class="navbar-brand" href="{{ url('/') }}">
-            <img src="{{ asset('images/MississiPy_Logo.png') }}" alt="MississiPy Logo" width="50" height="50"
-            class="navbar-logo">
+            <img src="{{ asset('images/Logo1.png') }}" alt="MississiPy Logo" class="navbar-logo1">
+            <img src="{{ asset('images/Logo2.png') }}" alt="MississiPy Logo" class="navbar-logo2">
         </a>
 
         <!-- Botão de toggler para dispositivos móveis -->
