@@ -1,4 +1,4 @@
-<style>
+{{-- <style>
     body {
         background-color: #F0F8FF; /* AliceBlue */
     }
@@ -20,7 +20,7 @@
     }
     td {
         color: #000000;
-    }
+    } --}}
 </style>
 
 <h1>BookAuthor List</h1>
