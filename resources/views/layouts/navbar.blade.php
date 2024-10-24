@@ -1,11 +1,10 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg bg-primary navbar-dark">
+<nav class="navbar navbar-expand-lg bg-primary navbar-dark" id="main-navbar">
     <div class="container-fluid">
-        <!-- Logo à esquerda -->
+        <!-- Logotipos personalizados à esquerda -->
         <a class="navbar-brand" href="{{ url('/') }}">
-            <img src="{{ asset('https://banner2.cleanpng.com/20180501/abw/avdegic5l.webp') }}" alt="MississiPy Logo"
-                width="30" height="30" class="d-inline-block align-text-top me-2">
-            MississiPy
+            <img src="{{ asset('images/Logo1.png') }}" alt="MississiPy Logo" class="navbar-logo1">
+            <img src="{{ asset('images/Logo2.png') }}" alt="MississiPy Logo" class="navbar-logo2">
         </a>
 
         <!-- Botão de toggler para dispositivos móveis -->
@@ -19,17 +18,22 @@
             <!-- Parte esquerda vazia (para centralizar o botão) -->
             <div class="navbar-nav"></div>
 
-            <!-- Botão de pesquisa centralizado com ícone à esquerda -->
+            <!-- Botão de pesquisa centralizado com ícone e atalho -->
             <div class="d-flex justify-content-center flex-grow-1">
                 <a class="btn btn-outline-light rounded-pill d-flex align-items-center justify-content-start"
                     href="{{ route('searchBar') }}" role="button" style="width: 300px;">
                     <i class="bi bi-search me-2"></i> <!-- Ícone de lupa à esquerda com margem -->
                     <span>Search...</span>
+                    <span class="ms-auto d-flex align-items-center" style="font-size: 1.2em; padding-left: 10px;">
+                        <!-- Exibindo ícone dinâmico do atalho, com classes Bootstrap -->
+                        <span id="shortcut-icon" class="bi"></span><span id="key-k" class="bi">K</span>
+                    </span>
                 </a>
             </div>
 
-            <!-- Menu à direita -->
+
             <ul class="navbar-nav ms-auto">
+                <!-- Menu à direita -->
                 @auth
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('checkout') }}">
@@ -62,7 +66,66 @@
                         <a class="nav-link" href="{{ route('register') }}">Register</a>
                     </li>
                 @endauth
+
+                <!-- Botão para alternar entre Dark/Light Mode -->
+                <li class="nav-item ms-3">
+                    <button id="themeToggle" class="btn btn-outline-light">
+                        <i id="themeIcon" class="bi bi-moon-fill"></i> <!-- Ícone para mudar -->
+                    </button>
+                </li>
             </ul>
         </div>
     </div>
 </nav>
+
+<!-- JavaScript para capturar atalho Cmd+K (Mac) ou Ctrl+K (outros) e ajustar ícone dinâmico -->
+<script>
+    document.addEventListener('keydown', function(event) {
+        if ((event.metaKey && event.key === 'k') || (event.ctrlKey && event.key === 'k')) {
+            event.preventDefault();
+            window.location.href = "{{ route('searchBar') }}";
+        }
+    });
+
+    // Detectar o sistema operacional e ajustar o ícone de atalho
+    const shortcutIcon = document.getElementById('shortcut-icon');
+    if (navigator.platform.indexOf('Mac') > -1) {
+        // Para Mac
+        shortcutIcon.innerHTML = '<span style="font-family: sans-serif; font-size: 18px;">&#8984;</span>'; // Cmd símbolo
+    } else if (navigator.platform.indexOf('Win') > -1) {
+        // Para Windows
+        shortcutIcon.innerHTML = '<span style="font-family: sans-serif; font-size: 18px;">&#x229E;</span>'; // Símbolo Windows (substituto)
+    } else {
+        // Para outros sistemas (Linux, etc.)
+        shortcutIcon.innerHTML = '<span style="font-family: sans-serif; font-size: 18px;">Ctrl</span>';
+    }
+
+    // Aumentando o "K"
+    document.getElementById('key-k').style.fontSize = '19px';
+
+    // Script para alternância de Dark/Light Mode
+    const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+
+    // Aplica o tema com base na preferência armazenada
+    if (currentTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        themeIcon.classList.remove('bi-moon-fill');
+        themeIcon.classList.add('bi-sun-fill');
+    }
+
+    themeToggleBtn.addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+
+        if (document.body.classList.contains('dark-mode')) {
+            themeIcon.classList.remove('bi-moon-fill');
+            themeIcon.classList.add('bi-sun-fill');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            themeIcon.classList.remove('bi-sun-fill');
+            themeIcon.classList.add('bi-moon-fill');
+            localStorage.setItem('theme', 'light');
+        }
+    });
+</script>

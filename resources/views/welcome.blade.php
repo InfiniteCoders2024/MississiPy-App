@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
@@ -8,14 +7,15 @@
 
     <title>MississiPy</title>
 
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 
     <!-- Styles -->
-    <style>
-
-    </style>
+    <style></style>
 
     <!-- Adiciona o Bootstrap CSS via CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -28,6 +28,7 @@
 
     <!-- Incluir o Navbar -->
     @include('layouts.navbar')
+
     {{-- <header>
                     @if (Route::has('login'))
                         <nav class="-mx-3 flex flex-1 justify-end">
@@ -53,8 +54,35 @@
                     @endif
                 </header> --}}
 
+    <!-- Conteúdo da página welcome -->
+    <div class="container">
+        <h1>Banner simples ou dinamico</h1>
+        <h1>2/4 para o destaque</h1>
+        <h1>1/4 para lista livros</h1>
+        <h1>1/4 para lista electronics</h1>
+        <!-- O teu conteúdo da página inicial vai aqui -->
+    </div>
 
-
+    <!-- Modal de Pesquisa (Adicionar logo após o conteúdo da página) -->
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-light">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="searchModalLabel">Search Products</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulário de pesquisa -->
+                    <form id="searchForm" action="{{ route('searchBar') }}" method="GET">
+                        <input type="text" name="query" class="form-control" id="searchInput" placeholder="Type your search query..." required>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" form="searchForm" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Adiciona o Bootstrap JS e Popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

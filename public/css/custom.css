@@ -1,0 +1,40 @@
+/* Modo claro é o padrão */
+body {
+    background-color: #fff;
+    color: #000;
+}
+
+.dark-mode {
+    background-color: #121212;
+    color: #f8f9fa;
+}
+
+/* Estilos para a navbar no modo escuro */
+.dark-mode .navbar {
+    background-color: #343a40 !important;
+}
+
+.dark-mode .btn-outline-light {
+    border-color: #f8f9fa;
+    color: #f8f9fa;
+}
+
+/* Define uma altura fixa para a navbar */
+.navbar {
+    height: 70px; /* Ajusta o valor conforme necessário */
+    display: flex;
+    align-items: center; /* Garante que o conteúdo fique centrado verticalmente */
+}
+
+/* Estilo para o logo1 */
+.navbar-logo1 {
+    height: 50px; /* Define o tamanho desejado do logo */
+    width: auto; /* Mantém a proporção do logo */
+}
+
+/* Estilo para o logo2 */
+.navbar-logo2 {
+    height: 130px; /* Define o tamanho desejado do logo */
+    width: auto; /* Mantém a proporção do logo */
+    margin-top: 18px;
+}
