@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg bg-primary navbar-dark">
+<nav class="navbar navbar-expand-lg bg-primary navbar-dark" id="main-navbar">
     <div class="container-fluid">
         <!-- Logo à esquerda -->
         <a class="navbar-brand" href="{{ url('/') }}">
@@ -32,8 +32,9 @@
                 </a>
             </div>
 
-            <!-- Menu à direita -->
+
             <ul class="navbar-nav ms-auto">
+                <!-- Menu à direita -->
                 @auth
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('checkout') }}">
@@ -66,6 +67,13 @@
                         <a class="nav-link" href="{{ route('register') }}">Register</a>
                     </li>
                 @endauth
+
+                <!-- Botão para alternar entre Dark/Light Mode -->
+                <li class="nav-item ms-3">
+                    <button id="themeToggle" class="btn btn-outline-light">
+                        <i id="themeIcon" class="bi bi-moon-fill"></i> <!-- Ícone para mudar -->
+                    </button>
+                </li>
             </ul>
         </div>
     </div>
@@ -95,4 +103,30 @@
 
     // Aumentando o "K"
     document.getElementById('key-k').style.fontSize = '19px';
+
+    // Script para alternância de Dark/Light Mode
+    const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+
+    // Aplica o tema com base na preferência armazenada
+    if (currentTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        themeIcon.classList.remove('bi-moon-fill');
+        themeIcon.classList.add('bi-sun-fill');
+    }
+
+    themeToggleBtn.addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+
+        if (document.body.classList.contains('dark-mode')) {
+            themeIcon.classList.remove('bi-moon-fill');
+            themeIcon.classList.add('bi-sun-fill');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            themeIcon.classList.remove('bi-sun-fill');
+            themeIcon.classList.add('bi-moon-fill');
+            localStorage.setItem('theme', 'light');
+        }
+    });
 </script>

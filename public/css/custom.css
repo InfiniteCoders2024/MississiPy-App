@@ -1,0 +1,20 @@
+/* Modo claro é o padrão */
+body {
+    background-color: #fff;
+    color: #000;
+}
+
+.dark-mode {
+    background-color: #121212;
+    color: #f8f9fa;
+}
+
+/* Estilos para a navbar no modo escuro */
+.dark-mode .navbar {
+    background-color: #343a40 !important;
+}
+
+.dark-mode .btn-outline-light {
+    border-color: #f8f9fa;
+    color: #f8f9fa;
+}
