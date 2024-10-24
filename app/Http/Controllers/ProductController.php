@@ -95,7 +95,9 @@ class ProductController extends Controller
 
         // Based on the product type, fetch the specific model
         if ($product_type == 'book') {
-            $specific_details = Book::findOrFail($id);
+            $specific_details = Book::with('Author')->findOrFail($id);
+            // Fetch the author details through the BookAuthor table
+            $author_details = $specific_details->author;
         } elseif ($product_type == 'electronic') {
             $specific_details = Electronic::findOrFail($id);
         } else {
@@ -106,6 +108,7 @@ class ProductController extends Controller
             'product_type' => $product_type,
             'common_details' => $common_details,
             'specific_details' => $specific_details,
+            'author_details' => $author_details ?? null // author details if available
         ]);
     }
 

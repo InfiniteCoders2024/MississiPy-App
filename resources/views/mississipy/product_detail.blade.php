@@ -24,7 +24,12 @@
             <p>Genre: {{ $specific_details->genre }}</p>
             <p>Publisher: {{ $specific_details->publisher }}</p>
             <p>Publication Date: {{ $specific_details->publication_date }}</p>
-        
+            <h3>Author Details</h3>
+            @foreach ($author_details as $author)
+                <p>Author Name: {{ $author->name }}</p>
+                <p>Author fullname  : {{ $author->fullname }}</p>
+                <p>Birth Date: {{ $author->birthdate }}</p>
+            @endforeach
         @elseif ($product_type == 'electronic')
             <p>Serial number: {{ $specific_details->serial_number }}</p>
             <p>Brand: {{ $specific_details->brand }}</p>
