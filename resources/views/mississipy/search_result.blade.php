@@ -4,4 +4,35 @@
         The only way to do great work is to love what you do. - Steve Jobs
     </div>
     
-  
+   <div>
+       <h1>Search Results for "{{ $searchText }}"</h1>
+
+       @if($results->isEmpty())
+           <p>No books found matching your search criteria.</p>
+       @else
+           <table class="table">
+               <thead>
+                   <tr>
+                       <th>product_id</th>
+                       <th>title</th>
+                       <th>isbn13</th>
+                       <th>genre</th>
+                       <th>publisher</th>
+                       <th>publication_date</th>
+                   </tr>
+               </thead>
+               <tbody>
+                   @foreach($results as $book)
+                   <tr>
+                       <td>{{ $book->product_id }}</td>
+                       <td>{{ $book->title }}</td>
+                       <td>{{ $book->isbn13 }}</td>
+                       <td>{{ $book->genre }}</td>
+                       <td>{{ $book->publisher }}</td>
+                       <td>{{ $book->publication_date }}</td>
+                   </tr>
+                   @endforeach
+               </tbody>
+           </table>
+       @endif
+   </div>
