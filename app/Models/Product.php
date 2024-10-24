@@ -12,7 +12,7 @@ class Product extends Model
     protected $table = 'Product';
     protected $connection = 'mysql_mississipy';
 
-    public $incrementing = false; 
+    public $incrementing = false;
     protected $primaryKey = 'id';
     protected $keyType = 'string';
 
@@ -34,6 +34,6 @@ class Product extends Model
 
     public function Electronik()
     {
-        return $this->hasMany(Electronik::class, 'product_id');
+        return $this->hasMany(Electronic::class, 'product_id');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 use App\Models\Book;        // for method showProductDetail
 use App\Models\Electronic;  // for method showProductDetail
@@ -74,16 +75,25 @@ class ProductController extends Controller
      */
     public function searchBar(Request $request)
     {
-        // Get the search term from the request
-        $termo = $request->input('searchBar');
+        // Captura o termo de pesquisa vindo da barra de pesquisa
+        $termo = $request->input('query');
 
-        // Search for products whose names contain the search term
-        $produtos = Product::where('id', 'like', '%' . $termo . '%')->get(); // 
+        // Faz a pesquisa na view vw_ProductDetails
+        $products = DB::table('vw_ProductDetails')
+            ->where(function ($query) use ($termo) {
+                $query->where('book_title', 'like', '%' . $termo . '%')
+                    ->orWhere('author_name', 'like', '%' . $termo . '%')
+                    ->orWhere('brand', 'like', '%' . $termo . '%')
+                    ->orWhere('model', 'like', '%' . $termo . '%')
+                    ->orWhere('genre', 'like', '%' . $termo . '%')
+                    ->orWhere('product_id', 'like', '%' . $termo . '%'); // Pesquisa por ID
+            })
+            ->where('active', true) // Apenas produtos ativos
+            ->get();
 
-        // Return the search results view with the matching products
-        return view('searchBar', compact('produtos'));
+        // Retorna a view com os resultados da pesquisa
+        return view('searchBar', ['products' => $$products]);
     }
-
 
     /**
      * Show the detail of a product based on its type.
@@ -111,5 +121,4 @@ class ProductController extends Controller
             'author_details' => $author_details ?? null // author details if available
         ]);
     }
-
 }
