@@ -91,10 +91,12 @@
     const shortcutIcon = document.getElementById('shortcut-icon');
     if (navigator.platform.indexOf('Mac') > -1) {
         // Para Mac
-        shortcutIcon.innerHTML = '<span style="font-family: sans-serif; font-size: 18px;">&#8984;</span>'; // Cmd símbolo
+        shortcutIcon.innerHTML =
+        '<span style="font-family: sans-serif; font-size: 18px;">&#8984;</span>'; // Cmd símbolo
     } else if (navigator.platform.indexOf('Win') > -1) {
         // Para Windows
-        shortcutIcon.innerHTML = '<span style="font-family: sans-serif; font-size: 18px;">&#x229E;</span>'; // Símbolo Windows (substituto)
+        shortcutIcon.innerHTML =
+        '<span style="font-family: sans-serif; font-size: 18px;">&#x229E;</span>'; // Símbolo Windows (substituto)
     } else {
         // Para outros sistemas (Linux, etc.)
         shortcutIcon.innerHTML = '<span style="font-family: sans-serif; font-size: 18px;">Ctrl</span>';

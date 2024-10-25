@@ -79,14 +79,10 @@ class ProductController extends Controller
         $termo = $request->input('query');
 
         // Faz a pesquisa na view vw_ProductDetails
-        $products = DB::table('vw_ProductDetails')
+        $products = DB::table('mississipy.vw_ProductDetails')
             ->where(function ($query) use ($termo) {
-                $query->where('book_title', 'like', '%' . $termo . '%')
-                    ->orWhere('author_name', 'like', '%' . $termo . '%')
-                    ->orWhere('brand', 'like', '%' . $termo . '%')
-                    ->orWhere('model', 'like', '%' . $termo . '%')
-                    ->orWhere('genre', 'like', '%' . $termo . '%')
-                    ->orWhere('product_id', 'like', '%' . $termo . '%'); // Pesquisa por ID
+                $query->where('Book.title', 'like', '%' . $termo . '%')
+                    ->orWhere('Author.name', 'like', '%' . $termo . '%');
             })
             ->where('active', true) // Apenas produtos ativos
             ->get();
