@@ -95,12 +95,13 @@ class ProductController extends Controller
                 'Electronic.model as electronic_model'
             )
             ->where(function ($query) use ($termo) {
-                $query->where('Book.title', 'like', '%' . $termo . '%')
-                    ->orWhere('Book.genre', 'like', '%' . $termo . '%')
-                    ->orWhere('Book.publisher', 'like', '%' . $termo . '%')
-                    ->orWhere('Author.name', 'like', '%' . $termo . '%')
-                    ->orWhere('Electronic.brand', 'like', '%' . $termo . '%')
-                    ->orWhere('Electronic.model', 'like', '%' . $termo . '%');
+                $lowerTerm = strtolower($termo);
+                $query->whereRaw('LOWER(Book.title) like ?', ["%{$lowerTerm}%"])
+                    ->orWhereRaw('LOWER(Book.genre) like ?', ["%{$lowerTerm}%"])
+                    ->orWhereRaw('LOWER(Book.publisher) like ?', ["%{$lowerTerm}%"])
+                    ->orWhereRaw('LOWER(Author.name) like ?', ["%{$lowerTerm}%"])
+                    ->orWhereRaw('LOWER(Electronic.brand) like ?', ["%{$lowerTerm}%"])
+                    ->orWhereRaw('LOWER(Electronic.model) like ?', ["%{$lowerTerm}%"]);
             })
             ->where('Product.active', true)
             ->get();
