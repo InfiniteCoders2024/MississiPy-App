@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Electronic;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Schema; // For method searchElectronicFor
 
 class ElectronicController extends Controller
 {
@@ -68,29 +67,4 @@ class ElectronicController extends Controller
         return redirect()->route('mississipy.electronic.index');
     }
 
-    /**
-     * Search the table electronic with the search text.
-     */
-    public function searchElectronicFor($searchText)
-    {
-        // Get all column names for searching
-        $columns = ['serial_num', 'brand', 'model', 'spec_tec', 'type'];
-
-        // Build the query
-        $query = Electronic::query();
-
-        foreach ($columns as $column) {
-            $query->orWhere($column, 'LIKE', "%{$searchText}%");
-        }
-
-        // Execute the query and get the results
-        $results = $query->get();
-
-        // Return the view with the results
-        return view('mississipy.search_result', [
-            'product_type' => 'electronic',
-            'results' => $results,
-            'searchText' => $searchText
-        ]);
-    }
 }

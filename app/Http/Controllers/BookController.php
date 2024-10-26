@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Schema; // For method searchBookFor
 
 class BookController extends Controller
 {
@@ -67,31 +66,5 @@ class BookController extends Controller
         $book->delete();
         return redirect()->route('mississipy.book.index');
     }
-
-    /**
-     * Search the table book with the search text.
-     */
-
-    public function searchBookFor($searchText)
-    {
-        // Get all column names for searching
-        $columns = ['isbn13', 'title', 'genre', 'publisher', 'publication_date'];
-
-        // Build the query
-        $query = Book::query();
-
-        foreach ($columns as $column) {
-            $query->orWhere($column, 'LIKE', "%{$searchText}%");
-        }
-
-        // Execute the query and get the results
-        $results = $query->get();
-
-        // Return the view with the results
-        return view('mississipy.search_result', [
-            'product_type' => 'book',
-            'results' => $results,
-            'searchText' => $searchText
-        ]);
-    }
+    
 }

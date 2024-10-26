@@ -33,7 +33,6 @@ use App\Http\Controllers\BookController;
 Route::get('/book', [BookController::class, 'index']);
 Route::post('/book', [BookController::class, 'store'])->name('mississipy.book.store');
 Route::get('/book/create', [BookController::class, 'create'])->name('mississipy.book.create');
-Route::get('/book/search/{searchText}', [BookController::class, 'searchBookFor']);
 
 // BookAuthor
 use App\Http\Controllers\BookAuthorController;
@@ -50,7 +49,6 @@ use App\Http\Controllers\ElectronicController;
 Route::get('/electronic', [ElectronicController::class, 'index']);
 Route::post('/electronic', [ElectronicController::class, 'store'])->name('mississipy.electronic.store');
 Route::get('/electronic/create', [ElectronicController::class, 'create'])->name('mississipy.electronic.create');
-Route::get('/electronic/search/{searchText}', [ElectronicController::class, 'searchElectronicFor']);
 
 // Operator
 use App\Http\Controllers\OperatorController;
