@@ -73,6 +73,7 @@ class ProductController extends Controller
     /**
      * Search for products based on a given term.
      */
+
     public function searchBar(Request $request)
     {
         $termo = strtolower($request->input('query'));
@@ -128,6 +129,8 @@ class ProductController extends Controller
 
         return view('searchBar', ['products' => $products]);
     }
+
+
     /**
      * Show the detail of a product based on its type.
      */
