@@ -84,14 +84,16 @@ class ProductController extends Controller
             ->join('BookAuthor', 'Book.product_id', '=', 'BookAuthor.product_id')
             ->join('Author', 'BookAuthor.author_id', '=', 'Author.id')
             ->join('Electronic', 'Product.id', '=', 'Electronic.product_id')
-            ->select('Product.id as id',
+            ->select(
+                'Product.id as id',
                 'Product.product_image as product_image',
                 'Book.title as book_title',
                 'Book.genre as book_genre',
                 'Book.publisher as book_publisher',
                 'Author.name as author_name',
                 'Electronic.brand as electronic_brand',
-                'Electronic.model as electronic_model')
+                'Electronic.model as electronic_model'
+            )
             ->where(function ($query) use ($termo) {
                 $query->where('Book.title', 'like', '%' . $termo . '%')
                     ->orWhere('Book.genre', 'like', '%' . $termo . '%')
@@ -99,9 +101,9 @@ class ProductController extends Controller
                     ->orWhere('Author.name', 'like', '%' . $termo . '%')
                     ->orWhere('Electronic.brand', 'like', '%' . $termo . '%')
                     ->orWhere('Electronic.model', 'like', '%' . $termo . '%');
-                })
-                ->where('Product.active', true)
-                ->get();
+            })
+            ->where('Product.active', true)
+            ->get();
 
         return view('searchBar', ['products' => $products]);
     }
