@@ -20,57 +20,28 @@
 
             <!-- Botão de pesquisa centralizado com ícone e atalho -->
             <div class="d-flex justify-content-center flex-grow-1">
-                <a class="btn btn-outline-light rounded-pill d-flex align-items-center justify-content-start"
-                    href="{{ route('searchBar') }}" role="button" style="width: 300px;">
-                    <i class="bi bi-search me-2"></i> <!-- Ícone de lupa à esquerda com margem -->
+                <button type="button" class="btn btn-outline-light rounded-pill d-flex align-items-center"
+                    data-bs-toggle="modal" data-bs-target="#searchModal" style="width: 300px;">
+                    <i class="bi bi-search me-2"></i>
                     <span>Search...</span>
                     <span class="ms-auto d-flex align-items-center" style="font-size: 1.2em; padding-left: 10px;">
-                        <!-- Exibindo ícone dinâmico do atalho, com classes Bootstrap -->
                         <span id="shortcut-icon" class="bi"></span><span id="key-k" class="bi">K</span>
                     </span>
-                </a>
+                </button>
             </div>
 
-
             <ul class="navbar-nav ms-auto">
-                <!-- Menu à direita -->
-                @auth
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('checkout') }}">
-                            <i class="bi bi-cart3 me-1"></i>Checkout
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person-circle me-1"></i>{{ Auth::user()->name }}
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <form action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item">Logout</button>
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
-                @else
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">Register</a>
-                    </li>
-                @endauth
-
-                <!-- Botão para alternar entre Dark/Light Mode -->
+                <!-- Login/Register -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">Register</a>
+                </li>
+                <!-- Botão para alternar Dark/Light Mode -->
                 <li class="nav-item ms-3">
                     <button id="themeToggle" class="btn btn-outline-light">
-                        <i id="themeIcon" class="bi bi-moon-fill"></i> <!-- Ícone para mudar -->
+                        <i id="themeIcon" class="bi bi-moon-fill"></i>
                     </button>
                 </li>
             </ul>
@@ -78,55 +49,52 @@
     </div>
 </nav>
 
-<!-- JavaScript para capturar atalho Cmd+K (Mac) ou Ctrl+K (outros) e ajustar ícone dinâmico -->
+<!-- Modal de Pesquisa -->
+<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark text-light">
+            <div class="modal-header">
+                <h5 class="modal-title" id="searchModalLabel">Search Products</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="searchForm" action="{{ route('searchBar') }}" method="GET">
+                    <input type="text" name="query" class="form-control" placeholder="Type your search query..." required>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" form="searchForm" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript para atalhos e alternância de Dark/Light Mode -->
 <script>
     document.addEventListener('keydown', function(event) {
         if ((event.metaKey && event.key === 'k') || (event.ctrlKey && event.key === 'k')) {
             event.preventDefault();
-            window.location.href = "{{ route('searchBar') }}";
+            new bootstrap.Modal(document.getElementById('searchModal')).show();
         }
     });
 
-    // Detectar o sistema operacional e ajustar o ícone de atalho
-    const shortcutIcon = document.getElementById('shortcut-icon');
-    if (navigator.platform.indexOf('Mac') > -1) {
-        // Para Mac
-        shortcutIcon.innerHTML =
-        '<span style="font-family: sans-serif; font-size: 18px;">&#8984;</span>'; // Cmd símbolo
-    } else if (navigator.platform.indexOf('Win') > -1) {
-        // Para Windows
-        shortcutIcon.innerHTML =
-        '<span style="font-family: sans-serif; font-size: 18px;">&#x229E;</span>'; // Símbolo Windows (substituto)
-    } else {
-        // Para outros sistemas (Linux, etc.)
-        shortcutIcon.innerHTML = '<span style="font-family: sans-serif; font-size: 18px;">Ctrl</span>';
-    }
-
-    // Aumentando o "K"
-    document.getElementById('key-k').style.fontSize = '19px';
-
-    // Script para alternância de Dark/Light Mode
-    const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+    // Alternância de modo Dark/Light
+    const currentTheme = localStorage.getItem('theme') || 'light';
     const themeToggleBtn = document.getElementById('themeToggle');
     const themeIcon = document.getElementById('themeIcon');
 
-    // Aplica o tema com base na preferência armazenada
     if (currentTheme === 'dark') {
         document.body.classList.add('dark-mode');
-        themeIcon.classList.remove('bi-moon-fill');
-        themeIcon.classList.add('bi-sun-fill');
+        themeIcon.classList.replace('bi-moon-fill', 'bi-sun-fill');
     }
 
     themeToggleBtn.addEventListener('click', function() {
         document.body.classList.toggle('dark-mode');
-
         if (document.body.classList.contains('dark-mode')) {
-            themeIcon.classList.remove('bi-moon-fill');
-            themeIcon.classList.add('bi-sun-fill');
+            themeIcon.classList.replace('bi-moon-fill', 'bi-sun-fill');
             localStorage.setItem('theme', 'dark');
         } else {
-            themeIcon.classList.remove('bi-sun-fill');
-            themeIcon.classList.add('bi-moon-fill');
+            themeIcon.classList.replace('bi-sun-fill', 'bi-moon-fill');
             localStorage.setItem('theme', 'light');
         }
     });
