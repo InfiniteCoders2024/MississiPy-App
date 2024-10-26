@@ -102,6 +102,18 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Estilo dos contêineres no modo claro */
+.square-container {
+    background-color: #fff;
+    color: #000;
+}
+
+/* Estilo dos contêineres no modo escuro */
+.dark-mode .square-container {
+    background-color: #000;
+    color: #f8f9fa;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
     .square-container {
