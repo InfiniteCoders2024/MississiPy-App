@@ -51,23 +51,25 @@
 
 <!-- Modal de Pesquisa -->
 <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-custom-position">
         <div class="modal-content bg-dark text-light">
-            <div class="modal-header">
+            <div class="modal-header border-bottom-0">
                 <h5 class="modal-title" id="searchModalLabel">Search Products</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <form id="searchForm" action="{{ route('searchBar') }}" method="GET">
-                    <input type="text" name="query" class="form-control" placeholder="Type your search query..." required>
+            <div class="modal-body d-flex justify-content-center align-items-center">
+                <form id="searchForm" action="{{ route('searchBar') }}" method="GET" style="width: 100%; max-width: 600px;">
+                    <div class="input-group">
+                        <input type="text" name="query" class="form-control form-control-lg bg-light text-dark" placeholder="Type your search query..." required>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" form="searchForm" class="btn btn-primary">Search</button>
             </div>
         </div>
     </div>
 </div>
+
+
 
 <!-- JavaScript para atalhos e alternância de Dark/Light Mode -->
 <script>

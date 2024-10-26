@@ -10,24 +10,29 @@ body {
 }
 
 /* Modal */
-/* Fundo do modal mais escuro */
-.modal-backdrop {
-    background-color: rgba(0, 0, 0, 0.9) !important;
+/* Remover a borda inferior da modal-header */
+.modal-header {
+    border-bottom: none;
 }
 
-#searchSuggestions .list-group-item {
-    background-color: #333;
-    color: #fff;
+/* Botão de pesquisa e campo de input */
+.modal-body .btn-primary {
+    border-radius: 0;
 }
 
-#searchSuggestions .list-group-item:hover {
-    background-color: #444;
-    color: #fff;
+.modal-body .form-control {
+    border-radius: 0;
 }
-
-.dark-mode .modal-content {
-    background-color: #343a40;
-    color: #f8f9fa;
+/* Posiciona o modal no topo da janela, mais para cima */
+.modal-custom-position {
+    display: flex;
+    align-items: flex-start; /* Coloca o modal mais próximo do topo */
+    margin-top: 10%; /* Ajusta a distância do topo da janela */
+}
+/* Estilo do input para dar destaque */
+.input-group .form-control:focus {
+    box-shadow: none;
+    border-color: #0d6efd;
 }
 
 /* Navbar */
