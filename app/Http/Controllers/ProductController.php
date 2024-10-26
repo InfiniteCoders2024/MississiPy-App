@@ -75,15 +75,14 @@ class ProductController extends Controller
      */
     public function searchBar(Request $request)
     {
-        // Search term
-        $termo = $request->input('query');
+        $termo = strtolower($request->input('query'));
 
-        $products = DB::connection('mysql_mississipy')
+        // Consulta para livros
+        $books = DB::connection('mysql_mississipy')
             ->table('Product')
-            ->join('Book', 'Product.id', '=', 'Book.product_id')
-            ->join('BookAuthor', 'Book.product_id', '=', 'BookAuthor.product_id')
-            ->join('Author', 'BookAuthor.author_id', '=', 'Author.id')
-            ->join('Electronic', 'Product.id', '=', 'Electronic.product_id')
+            ->leftJoin('Book', 'Product.id', '=', 'Book.product_id')
+            ->leftJoin('BookAuthor', 'Book.product_id', '=', 'BookAuthor.product_id')
+            ->leftJoin('Author', 'BookAuthor.author_id', '=', 'Author.id')
             ->select(
                 'Product.id as id',
                 'Product.product_image as product_image',
@@ -91,24 +90,44 @@ class ProductController extends Controller
                 'Book.genre as book_genre',
                 'Book.publisher as book_publisher',
                 'Author.name as author_name',
-                'Electronic.brand as electronic_brand',
-                'Electronic.model as electronic_model'
+                DB::raw('NULL as electronic_brand'),
+                DB::raw('NULL as electronic_model')
             )
             ->where(function ($query) use ($termo) {
-                $lowerTerm = strtolower($termo);
-                $query->whereRaw('LOWER(Book.title) like ?', ["%{$lowerTerm}%"])
-                    ->orWhereRaw('LOWER(Book.genre) like ?', ["%{$lowerTerm}%"])
-                    ->orWhereRaw('LOWER(Book.publisher) like ?', ["%{$lowerTerm}%"])
-                    ->orWhereRaw('LOWER(Author.name) like ?', ["%{$lowerTerm}%"])
-                    ->orWhereRaw('LOWER(Electronic.brand) like ?', ["%{$lowerTerm}%"])
-                    ->orWhereRaw('LOWER(Electronic.model) like ?', ["%{$lowerTerm}%"]);
+                $query->whereRaw('LOWER(Book.title) like ?', ["%{$termo}%"])
+                    ->orWhereRaw('LOWER(Book.genre) like ?', ["%{$termo}%"])
+                    ->orWhereRaw('LOWER(Book.publisher) like ?', ["%{$termo}%"])
+                    ->orWhereRaw('LOWER(Author.name) like ?', ["%{$termo}%"]);
             })
             ->where('Product.active', true)
             ->get();
 
+        // Consulta para eletrônicos
+        $electronics = DB::connection('mysql_mississipy')
+            ->table('Product')
+            ->leftJoin('Electronic', 'Product.id', '=', 'Electronic.product_id')
+            ->select(
+                'Product.id as id',
+                'Product.product_image as product_image',
+                DB::raw('NULL as book_title'),
+                DB::raw('NULL as book_genre'),
+                DB::raw('NULL as book_publisher'),
+                DB::raw('NULL as author_name'),
+                'Electronic.brand as electronic_brand',
+                'Electronic.model as electronic_model'
+            )
+            ->where(function ($query) use ($termo) {
+                $query->whereRaw('LOWER(Electronic.brand) like ?', ["%{$termo}%"])
+                    ->orWhereRaw('LOWER(Electronic.model) like ?', ["%{$termo}%"]);
+            })
+            ->where('Product.active', true)
+            ->get();
+
+        // Combinar os resultados
+        $products = $books->merge($electronics);
+
         return view('searchBar', ['products' => $products]);
     }
-
     /**
      * Show the detail of a product based on its type.
      */
