@@ -75,20 +75,35 @@ class ProductController extends Controller
      */
     public function searchBar(Request $request)
     {
-        // Captura o termo de pesquisa vindo da barra de pesquisa
+        // Search term
         $termo = $request->input('query');
 
-        // Faz a pesquisa na view vw_ProductDetails
-        $products = DB::table('mississipy.vw_ProductDetails')
+        $products = DB::connection('mysql_mississipy')
+            ->table('Product')
+            ->join('Book', 'Product.id', '=', 'Book.product_id')
+            ->join('BookAuthor', 'Book.product_id', '=', 'BookAuthor.product_id')
+            ->join('Author', 'BookAuthor.author_id', '=', 'Author.id')
+            ->join('Electronic', 'Product.id', '=', 'Electronic.product_id')
+            ->select('Product.id as id',
+                'Product.product_image as product_image',
+                'Book.title as book_title',
+                'Book.genre as book_genre',
+                'Book.publisher as book_publisher',
+                'Author.name as author_name',
+                'Electronic.brand as electronic_brand',
+                'Electronic.model as electronic_model')
             ->where(function ($query) use ($termo) {
                 $query->where('Book.title', 'like', '%' . $termo . '%')
-                    ->orWhere('Author.name', 'like', '%' . $termo . '%');
-            })
-            ->where('active', true) // Apenas produtos ativos
-            ->get();
+                    ->orWhere('Book.genre', 'like', '%' . $termo . '%')
+                    ->orWhere('Book.publisher', 'like', '%' . $termo . '%')
+                    ->orWhere('Author.name', 'like', '%' . $termo . '%')
+                    ->orWhere('Electronic.brand', 'like', '%' . $termo . '%')
+                    ->orWhere('Electronic.model', 'like', '%' . $termo . '%');
+                })
+                ->where('Product.active', true)
+                ->get();
 
-        // Retorna a view com os resultados da pesquisa
-        return view('searchBar', ['products' => $$products]);
+        return view('searchBar', ['products' => $products]);
     }
 
     /**

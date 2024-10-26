@@ -5,7 +5,6 @@
 @section('content')
     <div class="container">
         <h1 class="mb-4">Search Results</h1>
-
         @if ($products->isEmpty())
             <div class="alert alert-info" role="alert">
                 No products found for the search term.
@@ -17,20 +16,18 @@
                         <div class="card">
                             <img src="{{ $product->product_image }}" class="card-img-top" alt="Product Image">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $product->book_title ?? $product->brand }}</h5>
+                                <h5 class="card-title">{{ $product->book_title ?? $product->electronic_brand }}</h5>
                                 <p class="card-text">
-                                    <strong>ID:</strong> {{ $product->product_id }}<br>
-                                    <strong>Price:</strong> €{{ number_format($product->price, 2) }}<br>
-                                    <strong>Score:</strong> {{ $product->score }}<br>
-                                    <strong>Type:</strong>
                                     @if ($product->book_title)
                                         Book<br>
-                                        <strong>Author:</strong> {{ $product->author_name }}<br>
-                                        <strong>Genre:</strong> {{ $product->genre }}
-                                    @elseif ($product->brand)
+                                        <strong>Title:</strong> {{ $product->book_title }}<br>
+                                        <strong>Genre:</strong> {{ $product->book_genre }}<br>
+                                        <strong>Publisher:</strong> {{ $product->book_publisher }}<br>
+                                        <strong>Author:</strong> {{ $product->author_name }}
+                                    @elseif ($product->electronic_brand)
                                         Electronic<br>
-                                        <strong>Model:</strong> {{ $product->model }}<br>
-                                        <strong>Type:</strong> {{ $product->electronic_type }}
+                                        <strong>Brand:</strong> {{ $product->electronic_brand }}<br>
+                                        <strong>Model:</strong> {{ $product->electronic_model }}
                                     @endif
                                 </p>
                             </div>
@@ -41,3 +38,4 @@
         @endif
     </div>
 @endsection
+
