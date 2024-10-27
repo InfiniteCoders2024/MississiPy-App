@@ -73,23 +73,54 @@
 
 <!-- JavaScript para atalhos e alternância de Dark/Light Mode -->
 <script>
+    let isSearchModalOpen = false;
+
     document.addEventListener('keydown', function(event) {
         if ((event.metaKey && event.key === 'k') || (event.ctrlKey && event.key === 'k')) {
             event.preventDefault();
-            new bootstrap.Modal(document.getElementById('searchModal')).show();
+
+            if (isSearchModalOpen) {
+                // Redireciona para a página inicial se o modal já está aberto
+                window.location.href = "{{ url('/') }}";
+                isSearchModalOpen = false;
+            } else {
+                // Exibe o modal na primeira vez
+                const modalElement = document.getElementById('searchModal');
+                if (modalElement) {
+                    new bootstrap.Modal(modalElement).show();
+                    isSearchModalOpen = true;
+                }
+            }
         }
     });
+
+    // Fechar o modal ao clicar fora ou no botão fechar, redefinindo a variável
+    const searchModalElement = document.getElementById('searchModal');
+    if (searchModalElement) {
+        searchModalElement.addEventListener('hidden.bs.modal', function () {
+            isSearchModalOpen = false;
+        });
+    }
+
+    // Ajuste do ícone de atalho e modo Dark/Light
+    const shortcutIcon = document.getElementById('shortcut-icon');
+    if (navigator.platform.indexOf('Mac') > -1) {
+        shortcutIcon.innerHTML = '<span style="font-family: sans-serif; font-size: 18px;">&#8984;</span>';
+    } else if (navigator.platform.indexOf('Win') > -1) {
+        shortcutIcon.innerHTML = '<span style="font-family: sans-serif; font-size: 18px;">&#x229E;</span>';
+    } else {
+        shortcutIcon.innerHTML = '<span style="font-family: sans-serif; font-size: 18px;">Ctrl</span>';
+    }
+    document.getElementById('key-k').style.fontSize = '19px';
 
     // Alternância de modo Dark/Light
     const currentTheme = localStorage.getItem('theme') || 'light';
     const themeToggleBtn = document.getElementById('themeToggle');
     const themeIcon = document.getElementById('themeIcon');
-
     if (currentTheme === 'dark') {
         document.body.classList.add('dark-mode');
         themeIcon.classList.replace('bi-moon-fill', 'bi-sun-fill');
     }
-
     themeToggleBtn.addEventListener('click', function() {
         document.body.classList.toggle('dark-mode');
         if (document.body.classList.contains('dark-mode')) {
