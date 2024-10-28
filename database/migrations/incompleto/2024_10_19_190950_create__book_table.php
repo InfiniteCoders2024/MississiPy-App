@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('_electronic', function (Blueprint $table) {
+        Schema::create('Book', function (Blueprint $table) {
             // $table->id();
             $table->foreignId('product_id')->constrained('_product');
-            $table->bigInteger('serial_number');
-            $table->string('brand', 20);
-            $table->string('model', 20);
-            $table->text('spec_tec');
-            $table->string('type', 10);
+            $table->string('isbn13', 13);
+            $table->string('title', 20);
+            $table->string('genre', 20);
+            $table->string('publisher', 20);
+            $table->integer('publication_date');
             // $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('_electronic');
+        Schema::dropIfExists('_book');
     }
 };

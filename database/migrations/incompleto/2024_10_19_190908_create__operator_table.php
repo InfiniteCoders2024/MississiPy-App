@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('_recommendation', function (Blueprint $table) {
+        Schema::create('Operator', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained('_product');
-            $table->foreignId('client_id')->constrained('_client');
-            $table->string('reason', 500);
-            $table->dateTime('start_date');
+            $table->string('firstname', 250)->nullable(false);
+            $table->string('surname', 250)->nullable(false);
+            $table->string('email', 50)->unique()->nullable(false);
+            $table->string('password', 50)->nullable(false);
             // $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('_recommendation');
+        Schema::dropIfExists('_operator');
     }
 };

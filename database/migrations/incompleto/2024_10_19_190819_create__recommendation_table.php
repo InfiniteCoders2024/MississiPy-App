@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('_author', function (Blueprint $table) {
+        Schema::create('Recommendation', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 20);
-            $table->string('fullname', 20);
-            $table->date('birthdate');
+            $table->foreignId('product_id')->constrained('_product');
+            $table->foreignId('client_id')->constrained('_client');
+            $table->string('reason', 500);
+            $table->dateTime('start_date');
             // $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('_author');
+        Schema::dropIfExists('_recommendation');
     }
 };

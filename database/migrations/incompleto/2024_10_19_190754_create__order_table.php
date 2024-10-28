@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('_order', function (Blueprint $table) {
+        Schema::create('Order', function (Blueprint $table) {
             $table->id();
             $table->dateTime('date_time')->default(now());
             $table->enum('delivery_method', ['regular', 'urgent'])->default('regular')->length(10);
