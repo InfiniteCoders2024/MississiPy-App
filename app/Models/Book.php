@@ -17,7 +17,13 @@ class Book extends Model
     public $incrementing = false;
     
     public $timestamps = false;
-    protected $fillable = ['isbn13', 'title', 'genre', 'publisher', 'publication_date'];
+    protected $fillable = [
+        'isbn13',
+        'title',
+        'genre',
+        'publisher',
+        'publication_date'
+    ];
 
 
     public function Product()

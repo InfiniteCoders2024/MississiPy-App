@@ -12,8 +12,19 @@ class Client extends Model
     protected $table = 'Client';
     protected $connection = 'mysql_mississipy';
     public $timestamps = false;
-    protected $fillable = ['firstname', 'surname', 'email', 'password', 'address', 'zip_code', 'city', 'country',
-    'phone_number','last_login', 'birthdate'];
+    protected $fillable = [
+        'firstname',
+        'surname',
+        'email',
+        'password',
+        'address',
+        'zip_code',
+        'city',
+        'country',
+        'phone_number',
+        'last_login',
+        'birthdate'
+    ];
 
 
     public function Orders()

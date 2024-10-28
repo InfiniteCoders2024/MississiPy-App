@@ -12,5 +12,10 @@ class Operator extends Model
     protected $table = 'Operator';
     protected $connection = 'mysql_mississipy';
     public $timestamps = false;
-    protected $fillable = ['firstname', 'surname', 'email', 'password'];
+    protected $fillable = [
+        'firstname',
+        'surname',
+        'email',
+        'password'
+    ];
 }

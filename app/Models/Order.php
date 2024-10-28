@@ -12,8 +12,14 @@ class Order extends Model
     protected $table = 'Order';
     protected $connection = 'mysql_mississipy';
     public $timestamps = false;
-    protected $fillable = ['date_time', 'delivery_method', 'status', 'payment_card_number',
-    'payment_card_name', 'payment_card_expiration'];
+    protected $fillable = [
+        'date_time',
+        'delivery_method',
+        'status',
+        'payment_card_number',
+        'payment_card_name',
+        'payment_card_expiration'
+    ];
 
 
     public function OrderedItem()

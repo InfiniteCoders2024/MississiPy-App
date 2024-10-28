@@ -17,7 +17,15 @@ class Product extends Model
     protected $keyType = 'string';
 
     public $timestamps = false;
-    protected $fillable = ['quantity', 'price', 'vat', 'score', 'product_image', 'active', 'reason'];
+    protected $fillable = [
+        'quantity',
+        'price',
+        'vat',
+        'score',
+        'product_image',
+        'active',
+        'reason'
+    ];
 
 
     public function OrderedItem()

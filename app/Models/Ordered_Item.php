@@ -12,7 +12,11 @@ class Ordered_Item extends Model
     protected $table = 'Ordered_Item';
     protected $connection = 'mysql_mississipy';
     public $timestamps = false;
-    protected $fillable = ['quantity', 'price', 'vat_amount'];
+    protected $fillable = [
+        'quantity',
+        'price',
+        'vat_amount'
+    ];
 
 
     public function Order()

@@ -12,7 +12,10 @@ class Recommendation extends Model
     protected $table = 'Recommendation';
     protected $connection = 'mysql_mississipy';
     public $timestamps = false;
-    protected $fillable = ['reason', 'start_date'];
+    protected $fillable = [
+        'reason',
+        'start_date'
+    ];
 
 
     public function Product()

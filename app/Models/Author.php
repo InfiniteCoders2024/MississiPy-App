@@ -12,7 +12,11 @@ class Author extends Model
     protected $table = 'Author';
     protected $connection = 'mysql_mississipy';
     public $timestamps = false;
-    protected $fillable = ['name', 'fullname', 'birthdate'];
+    protected $fillable = [
+        'name',
+        'fullname',
+        'birthdate'
+    ];
 
     public function Book()
     {
