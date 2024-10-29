@@ -40,23 +40,27 @@
             <table class="table table-striped table-bordered table-hover">
                 <thead class="table-dark">
                     <tr>
-                        <th>Product ID</th>
-                        <th>ISBN13</th>
                         <th>Title</th>
                         <th>Genre</th>
                         <th>Publisher</th>
                         <th>Publication Date</th>
+                        <th>ISBN13</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($books as $book)
                         <tr>
-                            <td>{{ $book->product_id }}</td>
-                            <td>{{ $book->isbn13 }}</td>
                             <td>{{ $book->title }}</td>
+                            <td>
+                                @foreach($book->authors as $author)
+                                    {{ $author->name }}@if(!$loop->last), @endif
+                                @endforeach
+                            </td>
+
                             <td>{{ $book->genre }}</td>
                             <td>{{ $book->publisher }}</td>
                             <td>{{ $book->publication_date }}</td>
+                            <td>{{ $book->isbn13 }}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -69,3 +73,22 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+<style>
+    .book-row {
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const bookRows = document.querySelectorAll('tbody tr');
+        bookRows.forEach(row => {
+            row.classList.add('book-row');
+            row.addEventListener('click', function() {
+                const bookId = this.getAttribute('data-book-id');
+                window.location.href = `/mississipy/book/${bookId}`;
+            });
+        });
+    });
+</script>

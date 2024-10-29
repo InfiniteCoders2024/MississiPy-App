@@ -12,7 +12,7 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $authors = Author::all();
+        $authors = Author::orderBy('name', 'asc')->get();
         return view('mississipy.author.index', compact('authors'));
     }
 

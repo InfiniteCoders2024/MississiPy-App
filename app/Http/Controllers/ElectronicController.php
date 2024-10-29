@@ -12,7 +12,7 @@ class ElectronicController extends Controller
      */
     public function index()
     {
-        $electronics = Electronic::all();
+        $electronics = Electronic::orderBy('brand', 'asc')->get();
         return view('mississipy.electronic.index', compact('electronics'));
     }
 

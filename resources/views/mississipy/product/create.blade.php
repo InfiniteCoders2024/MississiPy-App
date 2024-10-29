@@ -45,7 +45,7 @@
 </head>
 <body>
 
-<h1>Create a New Order</h1>
+<h1>Create a New Product</h1>
 
 <form action="{{ route('mississipy.product.store') }}" method="POST">
     @csrf
