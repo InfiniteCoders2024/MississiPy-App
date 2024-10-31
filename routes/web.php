@@ -96,9 +96,10 @@ Route::get('/recommendation/create', [RecommendationController::class, 'create']
 
 Route::get('/searchBar', [ProductController::class, 'searchBar'])->name('searchBar');
 
-// Routes for Views ----------------------------------------------------------------------
 
-// welcome_client
-Route::get('/welcome_client', function () {
-    return view('mississipy.welcome_client');
-})->name('welcome_client');
+// Route for the Shopping Cart
+use App\Http\Controllers\CartController;
+
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::get('/cart/view', [CartController::class, 'view'])->name('cart.view');
+Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');

@@ -2,10 +2,8 @@
 
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-        Welcome {{ Auth::user()->name }}
+        <h2>Welcome, {{ Auth::user()->name }}</h2>
+        <h3>To your Dashboard</h3>
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -37,4 +35,10 @@
     <button onclick="window.location.href='/order'" class="btn btn-primary">
         View Orders
     </button>
+
+    <div>
+        <p>
+            <a href="{{ route('cart.view') }}" class="btn btn-primary">View your shopping cart</a>
+        </p>
+    </div>
 </div>
