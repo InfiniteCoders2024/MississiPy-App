@@ -26,7 +26,8 @@
     @include('layouts.navbar')
 
     <!-- Banner com contêineres quadrados sobrepostos -->
-    <div id="bannerCarousel" class="carousel slide carousel-fade banner-container" data-bs-ride="carousel" data-bs-interval="5000">
+    <div id="bannerCarousel" class="carousel slide carousel-fade banner-container" data-bs-ride="carousel"
+        data-bs-interval="5000">
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="images/banner1.jpg" class="d-block w-100 banner-image" alt="Imagem 1">
@@ -65,7 +66,8 @@
             <div class="modal-content bg-dark text-light">
                 <div class="modal-header">
                     <h5 class="modal-title" id="searchModalLabel">Search Products</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="searchForm" action="{{ route('searchBar') }}" method="GET">
@@ -79,7 +81,15 @@
             </div>
         </div>
     </div>
+    <!-- Seu código existente -->
 
+    <!-- Footer -->
+    <footer class="footer bg text-light text-center py-4">
+        <div class="container">
+            <p class="mb-0">&copy; {{ date('Y') }} © Copyright Projecto desenvolvido por Miguel Carvalho e Joaquim
+                Falcão.</p>
+        </div>
+    </footer>
     <!-- Bootstrap JS e Popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">

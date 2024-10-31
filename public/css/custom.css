@@ -35,8 +35,28 @@ body {
     border-color: #0d6efd;
 }
 
+/* Estilo do Footer no modo escuro */
+.dark-mode .footer {
+    background-color: #343a40; /* cor mais escura */
+    color: #f8f9fa;
+}
+
+/* Estilo do Footer no modo claro */
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 32px;
+    background-color: #0d6dfdca; /* cor azul clara */
+    color: #f8f9fa;
+    display: flex;
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    text-align: center;
+}
+
 /* Navbar */
-.dark-mode .navbar {
+.dark-mode .navbar{
     background-color: #343a40 !important;
 }
 
