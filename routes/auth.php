@@ -9,9 +9,8 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
-use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\EmployeeDashboardController;
+use Illuminate\Support\Facades\Route;
 
 
 Route::middleware('guest')->group(function () {
@@ -55,14 +54,12 @@ Route::middleware('auth')->group(function () {
 
     Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 
-    Route::put('password', [PasswordController::class, 'update'])->name('password.update');
+    Route::put('password', [PasswordController::class, 'update'])
+        ->name('password.update');
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 
-    Route::get('/dashboard_employee', [EmployeeDashboardController::class, 'index'])->name('dashboard_employee');
+    Route::get('/empregado', [EmployeeDashboardController::class, 'index'])
+        ->name('dashboard_employee');
 });
-
-
-
-
