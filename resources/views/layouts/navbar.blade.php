@@ -15,7 +15,6 @@
 
         <!-- Centralizando o botão de pesquisa -->
         <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-            <!-- Parte esquerda vazia (para centralizar o botão) -->
             <div class="navbar-nav"></div>
 
             <!-- Botão de pesquisa centralizado com ícone e atalho -->
@@ -30,14 +29,32 @@
                 </button>
             </div>
 
-            <ul class="navbar-nav ms-auto">
-                <!-- Login/Register -->
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">Register</a>
-                </li>
+            <!-- Opções de Autenticação, Saudação e Dark/Light Mode -->
+            <ul class="navbar-nav ms-auto align-items-center">
+                <!-- Exibe a saudação e Logout se o usuário estiver autenticado -->
+                @auth
+                    <li class="nav-item me-3 text-light">
+                        <span class="text-white">Welcome, {{ Auth::user()->name }}</span>
+                    </li>
+                    <li class="nav-item">
+                        <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                            @csrf
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();"
+                                class="nav-link">
+                                Logout
+                            </a>
+                        </form>
+                    </li>
+                @else
+                    <!-- Exibe Login e Register se o usuário não estiver autenticado -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">Register</a>
+                    </li>
+                @endauth
+
                 <!-- Botão para alternar Dark/Light Mode -->
                 <li class="nav-item ms-3">
                     <button id="themeToggle" class="btn btn-outline-light">
@@ -55,12 +72,15 @@
         <div class="modal-content bg-dark text-light">
             <div class="modal-header border-bottom-0">
                 <h5 class="modal-title" id="searchModalLabel">Search Products</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
             </div>
             <div class="modal-body d-flex justify-content-center align-items-center">
-                <form id="searchForm" action="{{ route('searchBar') }}" method="GET" style="width: 100%; max-width: 600px;">
+                <form id="searchForm" action="{{ route('searchBar') }}" method="GET"
+                    style="width: 100%; max-width: 600px;">
                     <div class="input-group">
-                        <input type="text" name="query" class="form-control form-control-lg bg-light text-dark" placeholder="Type your search query..." required>
+                        <input type="text" name="query" class="form-control form-control-lg bg-light text-dark"
+                            placeholder="Type your search query..." required>
                         <button type="submit" class="btn btn-primary">Search</button>
                     </div>
                 </form>
@@ -68,8 +88,6 @@
         </div>
     </div>
 </div>
-
-
 
 <!-- JavaScript para atalhos e alternância de Dark/Light Mode -->
 <script>
@@ -97,7 +115,7 @@
     // Fechar o modal ao clicar fora ou no botão fechar, redefinindo a variável
     const searchModalElement = document.getElementById('searchModal');
     if (searchModalElement) {
-        searchModalElement.addEventListener('hidden.bs.modal', function () {
+        searchModalElement.addEventListener('hidden.bs.modal', function() {
             isSearchModalOpen = false;
         });
     }
