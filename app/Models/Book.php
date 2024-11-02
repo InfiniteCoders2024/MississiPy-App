@@ -31,7 +31,7 @@ class Book extends Model
         return $this->belongsTo(Product::class, 'product_id');
     }
 
-    public function Author()
+    public function BookAuthor()
     {
         return $this->belongsToMany(Author::class, 'BookAuthor', 'author_id', 'id');
     }

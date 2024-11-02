@@ -97,7 +97,7 @@ Route::get('/recommendation/create', [RecommendationController::class, 'create']
 Route::get('/searchBar', [ProductController::class, 'searchBar'])->name('searchBar');
 
 
-// Route for the Shopping Cart
+// Route for the Shopping Cart -----------------------------------------------------------
 use App\Http\Controllers\CartController;
 
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');

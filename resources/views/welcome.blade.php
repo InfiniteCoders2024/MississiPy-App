@@ -18,6 +18,38 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Ícones Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- Book & Electronic section -->
+    <style>
+        /* Commom */
+        .card {
+            background-color: #ffffff;
+            transition: box-shadow 0.3s;
+        }
+        .card:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .square-container {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        /*  Books */
+        .books {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        /* Electronics*/
+        .electronics {
+            background-color: #d1e7ff;
+            padding: 15px;
+            border-radius: 5px;
+        }
+    </style>
+
 </head>
 
 <body class="font-sans antialiased dark:bg-black dark:text-white/50">
@@ -54,8 +86,73 @@
         <div class="container-wrapper">
             <div class="square-container main-square">2/4 para o destaque</div>
             <div class="side-square-wrapper">
-                <div class="square-container side-square">1/4 para lista de livros</div>
-                <div class="square-container side-square">1/4 para lista de eletrônicos</div>
+
+                <!-- Books  -->
+                <div class="square-container side-square">
+                    <div class="books">
+                        <h7 class="text-center my-2">Books</h7>
+                        <div class="row">
+                            @if($books->isEmpty())
+                                <p class="text-center">No books available.</p>
+                            @else
+                                @foreach($books as $book)
+                                    <div class="col-md-4">
+                                        <div class="card mb-3 shadow-sm">
+                                            <div class="card-body">
+                                                <h8 class="card-title">{{ $book->title }}</h8>
+                                                <p class="card-text">
+                                                    <span class="badge bg-info text-dark">{{ $book->genre }}</span>
+                                                </p>
+                                                <img src="{{ $book->product->product_image }}" class="img-fluid">
+
+                                                <!-- Check if there are authors -->
+                                                @if($book->bookauthor->isEmpty())
+                                                    <p>Authors unavailable</p>
+                                                @else
+                                                    <h6>Authors:</h6>
+                                                    <ul>
+                                                        @foreach($book->author as $writer)
+                                                            <li>{{ $writer->name }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <!-- / Books  -->
+                
+                <!-- Electronic -->
+                <div class="square-container side-square">
+                    <div class="electronics">
+                        <h7 class="text-center my-2">Electronics</h7>
+                        <div class="row">
+                            @if($electronics->isEmpty())
+                            <p class="text-center">No elctronics available.</p>
+                            @else
+                            @foreach($electronics as $electronic)
+                            <div class="col-md-4">
+                                <div class="card mb-3 shadow-sm border-0">
+                                    <div class="card-body">
+                                        <h8 class="card-title">{{ $electronic->model }}</h8>
+                                        <p class="card-text">
+                                            <span class="badge bg-success text-white">{{ $electronic->brand }}</span>
+                                        </p>
+                                        <img src="{{ $electronic->product->product_image }}" class="img-fluid">
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <!-- / Electronic -->
+                
             </div>
         </div>
     </div>

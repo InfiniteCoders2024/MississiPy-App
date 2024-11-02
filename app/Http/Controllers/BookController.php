@@ -67,5 +67,4 @@ class BookController extends Controller
         $book->delete();
         return redirect()->route('mississipy.book.index');
     }
-    
 }
