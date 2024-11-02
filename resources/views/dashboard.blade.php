@@ -80,7 +80,7 @@
 <!-- Footer -->
 <footer class="footer bg text-light text-center py-4">
     <div class="container">
-        <p class="mb-0">&copy; {{ date('Y') }} © Copyright Projecto desenvolvido por Miguel Carvalho e Joaquim
+        <p class="mb-0">{{ date('Y') }} © Copyright - Projecto desenvolvido por Miguel Carvalho e Joaquim
             Falcão.</p>
     </div>
 </footer>
