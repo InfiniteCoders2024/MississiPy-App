@@ -75,6 +75,105 @@
             <a href="{{ route('cart.view') }}" class="btn btn-primary">View your shopping cart</a>
         </p>
     </div>
+<div class="container mt-4">
+    <div class="row">
+
+<div class="container mt-4">
+    <div class="row">
+        <!-- Books Table -->
+        <div class="col-md-6">
+            <div class="square-container side-square">
+                <div class="books">
+                    <h7 class="text-center my-2">Books</h7>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Genre</th>
+                                    <th>Image</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if($books->isEmpty())
+                                    <tr>
+                                        <td colspan="3" class="text-center">No books available.</td>
+                                    </tr>
+                                @else
+                                    @foreach($books as $book)
+                                        <tr onclick="event.preventDefault(); document.getElementById('addBookForm{{ $book->id }}').submit();" style="cursor: pointer;">
+                                            <form id="addBookForm{{ $book->id }}" action="{{ route('cart.add', $book->id) }}" method="POST" style="display: none;">
+                                                @csrf
+                                                <input type="hidden" name="product_type" value="book">
+                                            </form>
+                                            <td>{{ $book->title }}</td>
+                                            <td>
+                                                <span class="badge bg-info text-dark">{{ $book->genre }}</span>
+                                            </td>
+                                            <td>
+                                                <img src="{{ $book->product->product_image }}" class="img-fluid" style="max-width: 100px;">
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Books Table -->
+
+        <!-- Electronics Table -->
+        <div class="col-md-6">
+            <div class="square-container side-square">
+                <div class="electronics">
+                    <h7 class="text-center my-2">Electronics</h7>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Model</th>
+                                    <th>Brand</th>
+                                    <th>Image</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if($electronics->isEmpty())
+                                    <tr>
+                                        <td colspan="3" class="text-center">No electronics available.</td>
+                                    </tr>
+                                @else
+                                    @foreach($electronics as $electronic)
+                                        <tr onclick="event.preventDefault(); document.getElementById('addElectronicForm{{ $electronic->id }}').submit();" style="cursor: pointer;">
+                                            <form id="addElectronicForm{{ $electronic->id }}" action="{{ route('cart.add', $electronic->id) }}" method="POST" style="display: none;">
+                                                @csrf
+                                                <input type="hidden" name="product_type" value="electronic">
+                                            </form>
+                                            <td>{{ $electronic->model }}</td>
+                                            <td>
+                                                <span class="badge bg-success text-white">{{ $electronic->brand }}</span>
+                                            </td>
+                                            <td>
+                                                <img src="{{ $electronic->product->product_image }}" class="img-fluid" style="max-width: 100px;">
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Electronics Table -->
+    </div>
+</div>
+    </div>
+</div>
+
+
+
 </div>
 </body>
 <!-- Footer -->
