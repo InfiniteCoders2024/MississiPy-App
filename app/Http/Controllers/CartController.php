@@ -25,19 +25,26 @@ class CartController extends Controller
         $existingItem = $cart->get($request->input('product_id'));
 
         if ($existingItem) {
-            // If it exists, update the quantity
-            $cart->update($existingItem->id, [
-                'quantity' => $existingItem->quantity + 1,
+            // Remove the existing item to prevent unwanted behavior with `update`
+            $cart->remove($existingItem->id);
+
+            // Re-add the item with the incremented quantity
+            $newQuantity = $existingItem->quantity + 1;
+            $cart->add([
+                'id' => $product->id,
+                'name' => $request->input('name'),
+                'price' => $product->price,
+                'quantity' => $newQuantity, // Increment quantity by 1
+                'product_type' => $request->input('product_type'),
             ]);
         } else {
-            // If it does not exist, add a new item to the cart
+            // If it does not exist, add a new item to the cart with quantity 1
             $cart->add([
                 'id' => $product->id,
                 'name' => $request->input('name'),
                 'price' => $product->price,
                 'quantity' => 1, // Starting quantity
                 'product_type' => $request->input('product_type'),
-
             ]);
         }
 
@@ -50,13 +57,13 @@ class CartController extends Controller
         return view('cart.view', compact('cartItems'));
     }
 
-   public function remove(Request $request)
+    public function remove(Request $request)
     {
         $productId = $request->input('product_id');
 
         // Authenticated user
         \Cart::session($request->user()->id)->remove($productId);
 
-    return redirect()->back()->with('success', 'Item removed from cart');
+        return redirect()->back()->with('success', 'Item removed from cart');
     }
 }
