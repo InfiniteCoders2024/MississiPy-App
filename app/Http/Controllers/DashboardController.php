@@ -5,15 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Electronic;
 use Illuminate\Http\Request;
+use Darryldecode\Cart\Facades\CartFacade as Cart;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Retrieve the books from the database
+        // Retrieve the books and electronics from the database
         $books = Book::all();
         $electronics = Electronic::all();
 
-        return view('dashboard', compact('books', 'electronics'));
+        // Retrieve cart items for the logged-in user
+        $cartItems = Cart::session($request->user()->id)->getContent();
+
+        return view('dashboard', compact('books', 'electronics', 'cartItems'));
     }
 }
