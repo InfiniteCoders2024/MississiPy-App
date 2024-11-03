@@ -1,27 +1,3 @@
-{{-- <style>
-    body {
-        background-color: #F0F4F8;
-    }
-    thead {
-        background-color: #1A365D;
-        color: #FFFFFF;
-    }
-    table {
-        background-color: #EDF2F7;
-    }
-    tbody tr:nth-child(even) {
-        background-color: #E2E8F0;
-    }
-    tbody tr:hover {
-        background-color: #CBD5E0;
-    }
-    h1 {
-        color: #2D3748;
-    }
-    td {
-        color: #4A5568;
-    }
-</style> --}}
 <head>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">

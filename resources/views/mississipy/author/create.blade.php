@@ -57,7 +57,8 @@
 
         <label for="birthdate">Author Birthdate:</label>
         <input type="date" id="birthdate" name="birthdate" required>
-
+        <br>
+        <br>
         <button type="submit">Create Author</button>
     </form>
 
