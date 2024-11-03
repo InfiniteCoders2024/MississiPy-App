@@ -3,23 +3,31 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class CartController extends Controller
 {
     public function add(Request $request)
     {
+        $request->validate([
+        'product_type' => 'required',
+        'product_id' => 'required',
+        'name' => 'required',
+        'quantity' => 'required|integer',
+    ]);
+
+        // Retrieve price in the Product Table
+        $product = Product::find($request->input('product_id'));
+
         \Cart::session($request->user()->id)->add([
             'id' => $request->input('product_id'),
             'name' => $request->input('name'),
-            'price' => $request->input('price'),
+            'price' => $product->price,
             'quantity' => $request->input('quantity'),
-            'attributes' => [
-                'size' => $request->input('size'),
-                'color' => $request->input('color'),
-            ],
         ]);
 
-        return redirect()->back()->with('success', 'Item added to cart');
+        $cartContent = \Cart::session($request->user()->id)->getContent();
+        return redirect()->back()->with('success', 'Item added to cart')->with('cartContent', $cartContent);
     }
 
     public function view()

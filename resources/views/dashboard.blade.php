@@ -104,8 +104,12 @@
                                         <tr onclick="event.preventDefault(); document.getElementById('addBookForm{{ $book->id }}').submit();" style="cursor: pointer;">
                                             <form id="addBookForm{{ $book->id }}" action="{{ route('cart.add', $book->id) }}" method="POST" style="display: none;">
                                                 @csrf
-                                                <input type="hidden" name="product_type" value="book">
+                                                 <input type="hidden" name="product_type" value="book">
+                                                <input type="hidden" name="product_id" value="{{ $book->product_id }}">
+                                                <input type="hidden" name="name" value="{{ $book->title }}">
+                                                <input type="hidden" name="quantity" value="1">
                                             </form>
+
                                             <td>{{ $book->title }}</td>
                                             <td>
                                                 <span class="badge bg-info text-dark">{{ $book->genre }}</span>
@@ -149,6 +153,9 @@
                                             <form id="addElectronicForm{{ $electronic->id }}" action="{{ route('cart.add', $electronic->id) }}" method="POST" style="display: none;">
                                                 @csrf
                                                 <input type="hidden" name="product_type" value="electronic">
+                                                <input type="hidden" name="product_id" value="{{ $electronic->product_id }}">
+                                                <input type="hidden" name="name" value="{{ $electronic->model }}">
+                                                <input type="hidden" name="quantity" value="1">
                                             </form>
                                             <td>{{ $electronic->model }}</td>
                                             <td>
