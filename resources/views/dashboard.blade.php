@@ -134,19 +134,6 @@
         </div>
     </x-app-layout>
 
-    <!-- Buttons to View Resources -->
-    <div class="text-center mt-4">
-        <button onclick="window.location.href='/author'" class="btn btn-primary">View Authors</button>
-        <button onclick="window.location.href='/book'" class="btn btn-primary">View Books</button>
-        <button onclick="window.location.href='/electronic'" class="btn btn-primary">View Electronics</button>
-        <button onclick="window.location.href='/order'" class="btn btn-primary">View Orders</button>
-        <div>
-            <p>
-                <a href="{{ route('cart.view') }}" class="btn btn-primary">View your shopping cart</a>
-            </p>
-        </div>
-    </div>
-
     <div class="container mt-4">
         <div class="row">
             <!-- Books Column with Product Cards -->
@@ -168,7 +155,7 @@
                                         <i class="bi bi-star-fill text-warning"></i>
                                         <i class="bi bi-star-fill text-warning"></i>
                                         <i class="bi bi-star-fill text-warning"></i>
-                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star text-warning"></i>
                                         (12223)
                                     </p>
                                 </div>
