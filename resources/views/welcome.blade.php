@@ -106,16 +106,19 @@
                                                 <img src="{{ $book->product->product_image }}" class="img-fluid">
 
                                                 <!-- Check if there are authors -->
-                                                @if($book->bookauthor->isEmpty())
-                                                    <p>Authors unavailable</p>
-                                                @else
-                                                    <h6>Authors:</h6>
-                                                    <ul>
-                                                        @foreach($book->author as $writer)
-                                                            <li>{{ $writer->name }}</li>
-                                                        @endforeach
-                                                    </ul>
-                                                @endif
+
+                                                <!-- 
+                                                    @if($book->bookauthor->isEmpty())
+                                                        <p>Authors unavailable</p>
+                                                    @else
+                                                        <h6>Authors:</h6>
+                                                        <ul>
+                                                            @foreach($book->author as $writer)
+                                                                <li>{{ $writer->name }}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    @endif
+                                                -->
                                             </div>
                                         </div>
                                     </div>
