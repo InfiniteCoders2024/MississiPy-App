@@ -2,15 +2,18 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- For the Display Modal with the Electronic Details -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </head>
 
 <div class="container mt-5">
     <h1 class="text-center mb-4">Electronic List</h1>
+
+    <!-- Back Button -->
+    <div class="mb-3 text-end">
+        <button class="btn btn-primary" onclick="goBack()">Go Back</button>
+    </div>
 
     <div class="table-responsive">
         <table class="table table-striped table-bordered table-hover">
@@ -47,6 +50,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="electronicModalLabel">Electronic Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <p><strong>Product ID:</strong> <span id="modal-product-id"></span></p>
@@ -70,8 +74,9 @@
         document.getElementById('modal-type').innerText = type;
         $('#electronicModal').modal('show');
     }
-</script>
 
-<!-- Bootstrap JS and Popper.js -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    // Function to go back to the previous page
+    function goBack() {
+        window.history.back();
+    }
+</script>

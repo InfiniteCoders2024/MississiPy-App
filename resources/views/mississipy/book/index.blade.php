@@ -31,12 +31,15 @@
     <title>Books List</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
 </head>
 <body>
     <div class="container mt-4">
         <h1 class="mb-4">Books List</h1>
+
+        <!-- Back Button -->
+        <div class="mb-3 text-end">
+            <button class="btn btn-primary" onclick="goBack()">Go Back</button>
+        </div>
 
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover">
@@ -51,7 +54,7 @@
                 </thead>
                 <tbody>
                     @foreach ($books as $book)
-                        <tr>
+                        <tr data-book-id="{{ $book->id }}"> <!-- Ensure you have data-book-id for identification -->
                             <td>{{ $book->title }}</td>
                             <td>{{ $book->genre }}</td>
                             <td>{{ $book->publisher }}</td>
@@ -67,6 +70,23 @@
     <!-- Bootstrap JS and Popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const bookRows = document.querySelectorAll('tbody tr');
+            bookRows.forEach(row => {
+                row.classList.add('book-row');
+                row.addEventListener('click', function() {
+                    const bookId = this.getAttribute('data-book-id');
+                    window.location.href = `/mississipy/book/${bookId}`;
+                });
+            });
+        });
+    </script>
 </body>
 </html>
 
@@ -75,16 +95,3 @@
         cursor: pointer;
     }
 </style>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const bookRows = document.querySelectorAll('tbody tr');
-        bookRows.forEach(row => {
-            row.classList.add('book-row');
-            row.addEventListener('click', function() {
-                const bookId = this.getAttribute('data-book-id');
-                window.location.href = `/mississipy/book/${bookId}`;
-            });
-        });
-    });
-</script>

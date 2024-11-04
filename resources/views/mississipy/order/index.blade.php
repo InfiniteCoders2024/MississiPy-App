@@ -1,16 +1,19 @@
 <head>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- For the Display Modal with the Electronic Details -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </head>
 
 <div class="container mt-5">
     <h1 class="text-center mb-4">Order List</h1>
+
+    <!-- Back Button -->
+    <div class="mb-3 text-end">
+        <button class="btn btn-primary" onclick="goBack()">Back</button>
+    </div>
 
     <div class="table-responsive">
         <table class="table table-striped table-bordered table-hover">
@@ -75,14 +78,14 @@
     function showOrderDetails(order_id, date_time, delivery_method, status, payment_card, card_name) {
         document.getElementById('modal-order-id').innerText = order_id;
         document.getElementById('modal-date-time').innerText = date_time; 
-        document.getElementById('modal-delivery').innerText = delivery_method; // Added to match the modal
-        document.getElementById('modal-status').innerText = status; // Added to match the modal
-        document.getElementById('modal-payment-card').innerText = payment_card; // Updated to match the modal
-        document.getElementById('modal-card-name').innerText = card_name; // Updated to match the modal
+        document.getElementById('modal-delivery').innerText = delivery_method; 
+        document.getElementById('modal-status').innerText = status; 
+        document.getElementById('modal-payment-card').innerText = payment_card; 
+        document.getElementById('modal-card-name').innerText = card_name; 
         $('#orderModal').modal('show');
     }
-</script>
 
-<!-- Bootstrap JS and Popper.js -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    function goBack() {
+        window.history.back(); // Go back to the previous page
+    }
+</script>
