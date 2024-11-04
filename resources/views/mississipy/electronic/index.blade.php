@@ -24,7 +24,13 @@
             <tbody>
                 @foreach ($electronics as $electronic)
                     <tr style="cursor:pointer;"
-                        onclick="showElectronicDetails('{{ $electronic->product_id }}', '{{ $electronic->serial_num }}', '{{ $electronic->brand }}', '{{ $electronic->model }}', '{{ $electronic->spec_tec }}', '{{ $electronic->type }}')">
+                        onclick="showElectronicDetails(
+                        '{{ $electronic->product_id }}', 
+                        '{{ $electronic->serial_num }}', 
+                        '{{ $electronic->brand }}', 
+                        '{{ $electronic->model }}', 
+                        '{{ $electronic->spec_tec }}', 
+                        '{{ $electronic->type }}')">
                         <td>{{ $electronic->brand }}</td>
                         <td>{{ $electronic->model }}</td>
                         <td>{{ $electronic->type }}</td>
