@@ -12,7 +12,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::with('Author')->orderBy('title', 'asc')->get();
+        $books = Book::all();
         return view('mississipy.book.index', compact('books'));
     }
 

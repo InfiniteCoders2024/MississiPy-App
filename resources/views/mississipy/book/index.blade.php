@@ -43,7 +43,6 @@
                 <thead class="table-dark">
                     <tr>
                         <th>Title</th>
-                        <th>Authors</th>
                         <th>Genre</th>
                         <th>Publisher</th>
                         <th>Publication Date</th>
@@ -54,12 +53,6 @@
                     @foreach ($books as $book)
                         <tr>
                             <td>{{ $book->title }}</td>
-                            <td>
-                                @foreach($book->authors as $author)
-                                    {{ $author->name }}@if(!$loop->last), @endif
-                                @endforeach
-                            </td>
-
                             <td>{{ $book->genre }}</td>
                             <td>{{ $book->publisher }}</td>
                             <td>{{ $book->publication_date }}</td>
