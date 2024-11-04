@@ -69,10 +69,10 @@
 
     <!-- Botão para abrir o Carrinho Offcanvas -->
     <button class="btn btn-primary position-fixed top-50 start-0 translate-middle-y" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" aria-controls="cartOffcanvas">
-        <i class="bi bi-cart-fill"></i> Cart
+        <i class="bi bi-cart-fill"></i> View your cart
     </button>
 
-    <!-- Carrinho Offcanvas -->
+    <!-- Cart Offcanvas -->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="cartOffcanvasLabel">Your Shopping Cart</h5>
@@ -82,18 +82,32 @@
             @if($cartItems->isEmpty())
                 <p>Your cart is empty.</p>
             @else
-                <ul class="list-group">
-                    @foreach($cartItems as $item)
-                        <li class="list-group-item">
-                            {{ $item->name }} - {{ $item->quantity }} - {{ $item->price }}€
-                            <form action="{{ route('cart.remove') }}" method="POST" style="display: inline;">
-                                @csrf
-                                <input type="hidden" name="product_id" value="{{ $item->id }}">
-                                <button type="submit" class="btn btn-danger btn-sm">Remove</button>
-                            </form>
-                        </li>
-                    @endforeach
-                </ul>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($cartItems as $item)
+                            <tr>
+                                <td>{{ $item->name }}</td>
+                                <td>{{ $item->quantity }}</td>
+                                <td>{{ number_format($item->price, 2) }}€</td>
+                                <td>
+                                    <form action="{{ route('cart.remove') }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $item->id }}">
+                                        <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
                 <p><strong>Total:</strong> {{ number_format(Cart::session(auth()->id())->getTotal(), 2) }}€</p>
             @endif
         </div>
@@ -151,17 +165,20 @@
                                     <h4 class="card-title">{{ $book->title }}</h4>
                                     <p class="card-text">
                                         <span class="badge bg-info">{{ $book->genre }}</span>
-                                        <i class="bi bi-star-fill text-warning"></i>
-                                        <i class="bi bi-star-fill text-warning"></i>
-                                        <i class="bi bi-star-fill text-warning"></i>
-                                        <i class="bi bi-star-fill text-warning"></i>
-                                        <i class="bi bi-star text-warning"></i>
-                                        (12223)
+
+                                        <!-- Stars score -->
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if ($i <= $book->product->score)
+                                                <i class="bi bi-star-fill text-warning"></i>
+                                            @else
+                                                <i class="bi bi-star text-warning"></i>
+                                            @endif
+                                        @endfor
                                     </p>
                                 </div>
                                 <div class="row align-items-center text-center g-0">
                                     <div class="col-4">
-                                        <h5>{{ $book->price }}€</h5>
+                                        <h9>{{ $book->product->price }}€</h9>
                                     </div>
                                     <div class="col-8">
                                         <form id="addBookForm{{ $book->product_id }}" action="{{ route('cart.add', $book->product_id) }}" method="POST" style="display: none;">
@@ -195,18 +212,19 @@
                                 <div class="card-body">
                                     <h4 class="card-title">{{ $electronic->model }}</h4>
                                     <p class="card-text">
-                                        <span class="badge bg-success">{{ $electronic->brand }}</span>
-                                        <i class="bi bi-star-fill text-warning"></i>
-                                        <i class="bi bi-star-fill text-warning"></i>
-                                        <i class="bi bi-star-fill text-warning"></i>
-                                        <i class="bi bi-star-fill text-warning"></i>
-                                        <i class="bi bi-star-fill text-warning"></i>
-                                        (24567)
+                                        <!-- Stars score -->
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if ($i <= $electronic->product->score)
+                                                <i class="bi bi-star-fill text-warning"></i>
+                                            @else
+                                                <i class="bi bi-star text-warning"></i>
+                                            @endif
+                                        @endfor
                                     </p>
                                 </div>
                                 <div class="row align-items-center text-center g-0">
                                     <div class="col-4">
-                                        <h5>{{ $electronic->price }}€</h5>
+                                        <h9>{{ $electronic->product->price }}€</h9>
                                     </div>
                                     <div class="col-8">
                                         <form id="addElectronicForm{{ $electronic->product_id }}" action="{{ route('cart.add', $electronic->product_id) }}" method="POST" style="display: none;">

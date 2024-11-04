@@ -11,8 +11,10 @@ class DashboardController extends Controller
 {
     public function index(Request $request)
     {
-        // Retrieve the books and electronics from the database
+        // Retrieve the books
         $books = Book::all();
+        
+        // Retrieve the electronics
         $electronics = Electronic::all();
 
         // Retrieve cart items for the logged-in user
